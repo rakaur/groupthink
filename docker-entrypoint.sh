@@ -2,15 +2,22 @@
 
 set -e
 
-echo "Environment: $RAILS_ENV"
+if [ "$RAILS_ENV" = "production" ]; then
+  echo "Environment: production"
+else
+  echo "Environment: development"
+fi
 
 # install missing gems
+echo "Checking dependencies..."
 bundle check || bundle install --jobs 20 --retry 5
 
 # prepare the db
+echo "Executing: bundle exec rails db:prepare"
 bundle exec rails db:prepare
 
 if [ "$RAILS_ENV" = "production" ]; then
+  echo "Executing: bundle exec rails assets:precompile"
   bundle exec rails assets:precompile
 fi
 

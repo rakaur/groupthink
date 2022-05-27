@@ -27,14 +27,19 @@
 For production, the included `Dockerfile` should be sufficient. The entry point
 is a shell script that verifies the dependencies, runs `rails db:prepare` and
 some other minor checks and setup and then executes puma. Set the
-appropriate environment variables, including database configuration and a
-`SECRET_KEY_BASE` that would otherwise be in `master.key`. See `.env-example`.
+appropriate environment variables, including `RAILS_ENV=production`, database
+configuration and a `SECRET_KEY_BASE` that would otherwise be in `master.key`.
+See `.env-example`.
 
 For development, the included `docker-compose.yml` will run the application and
 a postgres container alongside. The application files will be shared with the
-container, and the entry point will be `rails s -p 3000 -b 0.0.0.0`.
+container, and the entry point will be `puma -C config/puma.rb`.
 
 ### Database
+
+In lieu of CLI flags, Rails uses `RAILS_ENV` to determine the current
+environment. For development you can usually leave this alone as it defaults to
+"development," but if you want production you need to set `RAILS_ENV`.
 
 Streams uses a postgresql database, specified via environment variables:
 
@@ -55,11 +60,7 @@ does.
 ## Tests
 
 Streams has a comprehensive test suite including controller, integration, model,
-and system tests. To run all tests, execute:
-
-  `$ rails test:all`
-
-Or, more commonly:
+and system tests.
 
   `$ rails test`
   `$ rails test:system`
@@ -73,7 +74,8 @@ Google Chrome installed. The system tests will not run in the docker image.
 
 Deployment with docker should be fairly painless? I've never actually used a
 container hosting service but from what I've read AWS ECS works in a manner
-similar to docker-compose.
+similar to docker-compose. Pass the right environment variables to the container
+and you should be all set.
 
 ### Heroku
 
