@@ -65,6 +65,6 @@ class StreamsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def stream_params
-      params.require(:stream).permit(:filters)
+      params.require(:stream).permit(:content)
     end
 end

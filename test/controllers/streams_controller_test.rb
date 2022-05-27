@@ -17,7 +17,7 @@ class StreamsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create stream" do
     assert_difference("Stream.count") do
-      post streams_url, params: { stream: { filters: @stream.filters } }
+      post streams_url, params: { stream: { content: @stream.content } }
     end
 
     assert_redirected_to stream_url(Stream.last)
@@ -34,7 +34,7 @@ class StreamsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update stream" do
-    patch stream_url(@stream), params: { stream: { filters: @stream.filters } }
+    patch stream_url(@stream), params: { stream: { content: @stream.content } }
     assert_redirected_to stream_url(@stream)
   end
 
