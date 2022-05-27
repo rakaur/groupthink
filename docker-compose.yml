@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:14.3-alpine
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    env_file: .env
+
+  streams:
+    build: .
+    entrypoint: ./docker-entrypoint.sh foreman start -f Procfile.dev
+    env_file: .env
+    volumes:
+      - .:/streams
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres:
