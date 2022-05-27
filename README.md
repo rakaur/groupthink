@@ -21,13 +21,13 @@
 
 For production, the included `Dockerfile` should be sufficient. The entry point
 is a shell script that verifies the dependencies, runs `rails db:prepare` and
-some other minor checks and setup and then executes `Procfile`. Set the
+some other minor checks and setup and then executes puma. Set the
 appropriate environment variables, including database configuration and a
 `SECRET_KEY_BASE` that would otherwise be in `master.key`. See `.env-example`.
 
 For development, the included `docker-compose.yml` will run the application and
 a postgres container alongside. The application files will be shared with the
-container, and the entry point will be `Procfile.dev`.
+container, and the entry point will be `rails s -p 3000 -b 0.0.0.0`.
 
 ### Database
 

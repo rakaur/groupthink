@@ -18,5 +18,5 @@ fi
 rm -f tmp/pids/server.pid
 
 # run passed commands
-echo "Executing: ${@}"
-${@}
+echo "Executing: bundle exec ${@}"
+bundle exec ${@}
