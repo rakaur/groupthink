@@ -17,4 +17,4 @@ COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY . .
 
 EXPOSE 3000
-ENTRYPOINT ./docker-entrypoint.sh puma -C config/puma.rb -e production
+ENTRYPOINT ./docker-entrypoint.sh puma -C config/puma.rb
