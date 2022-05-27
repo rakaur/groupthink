@@ -13,9 +13,8 @@ RUN apk update && \
     apk add tzdata postgresql-client yarn && \
     rm -rf /var/cache/apk/*
 WORKDIR /streams
-RUN gem install foreman
 COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY . .
 
 EXPOSE 3000
-ENTRYPOINT ./docker-entrypoint.sh foreman start
+ENTRYPOINT ./docker-entrypoint.sh puma -C config/puma.rb -e production
