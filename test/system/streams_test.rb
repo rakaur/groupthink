@@ -14,7 +14,7 @@ class StreamsTest < ApplicationSystemTestCase
     visit streams_url
     click_on "New stream"
 
-    fill_in "Filters", with: @stream.filters
+    fill_in "Content", with: @stream.content
     click_on "Create Stream"
 
     assert_text "Stream was successfully created"
@@ -25,7 +25,7 @@ class StreamsTest < ApplicationSystemTestCase
     visit stream_url(@stream)
     click_on "Edit this stream", match: :first
 
-    fill_in "Filters", with: @stream.filters
+    fill_in "Content", with: @stream.content
     click_on "Update Stream"
 
     assert_text "Stream was successfully updated"

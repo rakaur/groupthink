@@ -1,5 +1,10 @@
 # Streams
 
+[![Ruby on Rails CI](https://github.com/rakaur/streams/actions/workflows/rubyonrails.yml/badge.svg)](https://github.com/rakaur/streams/actions/workflows/rubyonrails.yml)
+[![CodeQL](https://github.com/rakaur/streams/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/rakaur/streams/actions/workflows/codeql-analysis.yml)
+[![Brakeman Scan](https://github.com/rakaur/streams/actions/workflows/brakeman.yml/badge.svg)](https://github.com/rakaur/streams/actions/workflows/brakeman.yml)
+
+
 * Repository was created with:
 
   ```
