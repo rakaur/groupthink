@@ -1,12 +1,12 @@
 <article class="message is-<%= defined?(type) ? type : "info" %>
          <%= defined?(size) ? "is-#{size}" : '' %>">
 
-  <% if headers %>
+  <% if (defined?(headers) ? headers : true) %>
     <div class="message-header">
       <p><%= defined?(title) ? title : 'message' %></p>
       <button class="delete" aria-label="delete"></button>
     </div>
   <% end %>
 
-  <div class="message-body"><%= defined?(body) ? body : '' %></div>
+  <div class="message-body"><%= defined?(body) ? raw(body) : '' %></div>
 </article>
