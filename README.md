@@ -33,7 +33,9 @@ See `.env-example`.
 
 For development, the included `docker-compose.yml` will run the application and
 a postgres container alongside. The application files will be shared with the
-container, and the entry point will be `puma -C config/puma.rb`.
+container, and the entry point will be `rails server`. You will need
+to set `POSTGRES_PASSWORD` in `.env` for initial setup of the database
+container. See `.env-example`.
 
 ### Database
 
