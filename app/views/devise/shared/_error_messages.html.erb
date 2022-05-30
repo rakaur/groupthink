@@ -1,0 +1,13 @@
+<%# I really wanted to use shared/_message.html.erb for this but it's too complex %>
+<%# TODO: maybe look into hijacking devise's controller to set this up %>
+<% if resource.errors.any? %>
+  <article class="message is-danger">
+    <div class="message-body">
+      <ul>
+        <% resource.errors.full_messages.each do |message| %>
+          <li><%= message.downcase %></li>
+        <% end %>
+      </ul>
+    </div>
+  </article>
+<% end %>

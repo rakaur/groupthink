@@ -30,5 +30,24 @@ module Streams
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # This is to stop rails from wrapping input fields inside error divs,
+    # which breaks my HTML. It somehow causes the <p> it's wrapped in to close
+    # immediately changing:
+    #
+    #   <p><input><icons></p>
+    #
+    # Into:
+    #
+    #   <p></p><error div><input></error div><icons>
+    #
+    # How this happens exactly I don't know. I looked at the raw html output
+    # and this is what happens. I think the tag builder or `html_safe` knows
+    # that a <div> shouldn't be in a <p> and so it inserts its <div> after the
+    # <p> which means the <input> or <label> or whatever gets moved outside the
+    # <p> which breaks the styling.
+    #
+    # This stops it from wrapping it anything.
+    config.action_view.field_error_proc = Proc.new { |html_tag| html_tag }
   end
 end

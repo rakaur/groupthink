@@ -1,0 +1,6 @@
+<% if alert %>
+  <%= render 'shared/message', type: :danger, headers: false, body: alert %>
+<% end %>
+<% if notice %>
+  <%= render 'shared/message', type: :success, headers: false, body: notice %>
+<% end %>

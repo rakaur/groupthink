@@ -1,0 +1,78 @@
+<section class="hero is-fullheight">
+  <div class="hero-body">
+    <div class="container">
+
+      <div class="columns is-centered">
+        <div class="column box is-4-tablet is-3-widescreen"
+             style="padding-bottom: 1.5rem; padding-left: 1.5rem; padding-right: 1.5rem">
+
+          <div class="field has-text-centered">
+            <h1 class="title is-1">streams</h1>
+          </div>
+
+          <hr class="has-background-grey" />
+
+          <%= render 'shared/flash' %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+
+          <%=
+            form_for resource,
+                     as: resource_name,
+                     url: registration_path(resource_name),
+                     html: data_turbo_false do |f|
+          %>
+            <div class="field">
+              <p class="control has-icons-left">
+                <%=
+                  f.email_field :email,
+                                autofocus: true,
+                                autocomplete: "email",
+                                placeholder: "email address",
+                                class: "input"
+                %>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-envelope"></i>
+                </span>
+              </p>
+            </div>
+
+            <div class="field">
+              <p class="control has-icons-left">
+                <%=
+                  f.password_field :password,
+                                   autocomplete: "new-password",
+                                   placeholder: "password",
+                                   class: "input"
+                %>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-lock"></i>
+                </span>
+              </p>
+            </div>
+
+            <div class="field">
+              <p class="control has-icons-left">
+                <%=
+                  f.password_field :password_confirmation,
+                                   autocomplete: "new-password",
+                                   placeholder: "password confirmation",
+                                   class: "input"
+                %>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-check"></i>
+                </span>
+              </p>
+            </div>
+
+            <div class="field">
+              <%= f.submit "sign up", class: "button is-primary is-fullwidth" %>
+            </div>
+          <% end %>
+
+          <%= render "devise/shared/links" %>
+
+        </div> <!-- class="column box" -->
+      </div> <!-- class="columns" -->
+    </div> <!-- class="container" -->
+  </div> <!-- class="hero-body" -->
+</section>
