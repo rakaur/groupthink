@@ -1,71 +1,58 @@
-<section class="hero is-fullheight">
-  <div class="hero-body">
-    <div class="container">
+<div class="block">
+  <p class="is-size-4 has-text-centered">
+    sign in to your account
+  </p>
+</div>
 
-      <div class="columns is-centered">
-        <div class="column box is-4-tablet is-3-widescreen"
-             style="padding-bottom: 1.5rem; padding-left: 1.5rem; padding-right: 1.5rem">
+<%= render "shared/flash" %>
 
-          <div class="field has-text-centered">
-            <h1 class="title is-1">streams</h1>
-          </div>
+<%=
+  form_for resource,
+           as: resource_name,
+           url: session_path(resource_name),
+           html: data_turbo_false do |f|
+%>
+  <div class="field">
+    <%= f.label :email, "email address", class: "label" %>
+    <p class="control has-icons-left">
+      <%=
+        f.email_field :email,
+                      autofocus: true,
+                      autocomplete: "email",
+                      placeholder: "email address",
+                      class: "input"
+      %>
+      <span class="icon is-small is-left">
+        <i class="fas fa-envelope"></i>
+      </span>
+    </p>
+  </div>
 
-          <hr class="has-background-grey" />
+  <div class="field">
+    <%= f.label :password, "password", class: "label" %>
+    <p class="control has-icons-left">
+      <%=
+        f.password_field :password,
+                         autocomplete: "current-password",
+                         placeholder: "password",
+                         class: "input"
+      %>
+      <span class="icon is-small is-left">
+        <i class="fas fa-lock"></i>
+      </span>
+    </p>
+  </div>
 
-          <%= render 'shared/flash' %>
+  <div class="field">
+    <p class="control">
+      <%= f.submit "sign in", class: "button is-primary is-fullwidth" %>
+    </p>
+  </div>
 
-          <%=
-            form_for resource,
-                     as: resource_name,
-                     url: session_path(resource_name),
-                     html: data_turbo_false do |f|
-          %>
-            <div class="field">
-              <p class="control has-icons-left">
-                <%=
-                  f.email_field :email,
-                                autofocus: true,
-                                autocomplete: "email",
-                                placeholder: "email address",
-                                class: "input"
-                %>
-                <span class="icon is-small is-left">
-                  <i class="fas fa-envelope"></i>
-                </span>
-              </p>
-            </div>
-
-            <div class="field">
-              <p class="control has-icons-left">
-                <%=
-                  f.password_field :password,
-                                   autocomplete: "current-password",
-                                   placeholder: "password",
-                                   class: "input"
-                %>
-                <span class="icon is-small is-left">
-                  <i class="fas fa-lock"></i>
-                </span>
-              </p>
-            </div>
-
-            <div class="field">
-              <%= f.submit "log in", class: "button is-primary is-fullwidth" %>
-            </div>
-
-            <% if devise_mapping.rememberable? %>
-              <div class="field is-fullwidth has-text-centered">
-                <%= f.check_box :remember_me %>
-                <%= f.label :remember_me, 'remember me' %>
-              </div>
-            <% end %>
-
-          <% end %>
-
-          <%= render "devise/shared/links" %>
-
-        </div> <!-- class="column box" -->
-      </div> <!-- class="columns" -->
-    </div> <!-- class="container" -->
-  </div> <!-- class="hero-body" -->
-</section>
+  <% if devise_mapping.rememberable? %>
+    <div class="field is-fullwidth has-text-centered">
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me, "remember me" %>
+    </div>
+  <% end %>
+<% end %>
