@@ -6,6 +6,12 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-user = User.new email: "admin@rhuidean.net"
-user.password = "chaendaer"
+user = User.create email: "admin@rhuidean.net"
+user.password = "admin-password"
 user.save!
+
+stream = Stream.create content: { all: true }
+stream.save!
+
+thought = Thought.create content: "Abandon all hope ye who enter here", user: user
+thought.save!

@@ -5,13 +5,15 @@
 # below each fixture, per the syntax in the comments below
 #
 admin:
-  email: rakaur@malkier.net
+  email: admin@rhuidean.net
   encrypted_password: <%= Devise::Encryptor.digest(User, "admin-password") %>
 
 one:
-  email: <%= Faker::Internet.email(domain: "rhuidean.net") %>
+  id: 1
+  email: <%= "#{Faker::Movies::StarWars.character.downcase.gsub(/\s/, '_')}@#{Faker::Movies::StarWars.planet.downcase.gsub(/\s/, '_')}.rhuidean.net" %>
   encrypted_password: <%= Devise::Encryptor.digest(User, "one-password") %>
 
 two:
-  email: <%= Faker::Internet.email(domain: "rhuidean.net") %>
+  id: 2
+  email: <%= "#{Faker::Movies::StarWars.character.downcase.gsub(/\s/, '_')}@#{Faker::Movies::StarWars.planet.downcase.gsub(/\s/, '_')}.rhuidean.net" %>
   encrypted_password: <%= Devise::Encryptor.digest(User, "two-password") %>
