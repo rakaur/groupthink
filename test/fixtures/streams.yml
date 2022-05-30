@@ -4,4 +4,4 @@ one:
   content: { 'all': true }
 
 two:
-  content: { 'user_id': <%= User.first.id %> }
+  content: { 'user_id': 1 }
