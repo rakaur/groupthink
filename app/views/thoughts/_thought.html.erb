@@ -1,53 +1,77 @@
-<div class="card">
-  <header class="card-header">
-    <p class="card-header-title">
-      <small><%= time_ago_in_words thought.created_at %> ago by <strong><%= thought.user_id %></strong></small>
-    </p>
-    <button class="card-header-icon" aria-label="more options">
-      <span class="icon">
-        <i class="fas fa-angle-down" aria-hidden="true"></i>
-      </span>
-    </button>
-  </header>
+<div id="<%= dom_id thought %>" class="card block">
   <div class="card-content">
-    <div class="content">
-      <%= thought.content %>
-      <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
-      <br>
-      <time datetime="<%= thought.created_at.strftime("%Y-%m-%d") %>">
-        <small><%= thought.created_at.strftime("%l:%M %p - %e %b %Y") %></small>
-      </time>
+    <div class="media block">
+      <div class="media-content">
+        <div class="content">
+          <nav class="level is-mobile">
+            <div class="level-left">
+              <a class="level-item">
+                <small>
+                  <strong>
+                    <%= user_signed_in? && current_user == thought.user ? "you" : thought.user.to_s %>
+                  </strong>
+                </small>
+              </a>
+            </div>
+            <div class="level-right">
+              <p class="level-item">
+                <small>
+                  <time datetime="<%= thought.created_at.strftime("%Y-%m-%d") %>">
+                    <small><%= thought.created_at.in_time_zone("America/Chicago").strftime("%e %b %Y") %></small>
+                  </time>
+                </small>
+              </p>
+            </div>
+          </nav>
+          <p>
+            <%= thought.content %> <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+            <br /><br />
+          </p>
+        </div>
+        <nav class="level is-mobile">
+          <div class="level-left">
+            <p class="level-item">
+                <small>
+                  <%= time_ago_in_words thought.created_at %> ago
+                </small>
+              </time>
+            </p>
+          </div>
+          <div class="level-right">
+            <a class="level-item">
+              <span class="icon is-small"><i class="fas fa-circle-arrow-up"></i></span>
+            </a>
+            <a class="level-item">
+              <span class="icon is-small"><i class="fas fa-circle-arrow-down"></i></span>
+            </a>
+          </div>
+        </nav>
+      </div>
     </div>
   </div>
   <footer class="card-footer">
-    <a href="#" class="card-footer-item">Save</a>
-    <a href="#" class="card-footer-item">Edit</a>
-    <a href="#" class="card-footer-item">Delete</a>
+    <a href="#" class="card-footer-item">React</a>
   </footer>
 </div>
 
 
-<!--<article id="<%= dom_id thought %>" class="media">
-  <div class="media-content">
+<!--
     <div class="content">
-      <p>
-        <%= thought.content %>
-        <br />
-        <small><%= time_ago_in_words thought.created_at %> ago by <strong><%= thought.user_id %></strong></small>
-      </p>
-    </div>
-    <nav class="level is-mobile">
-      <div class="level-left">
-        <a class="level-item">
-          <span class="icon is-small"><i class="fas fa-reply"></i></span>
-        </a>
-        <a class="level-item">
-          <span class="icon is-small"><i class="fas fa-retweet"></i></span>
-        </a>
-        <a class="level-item">
-          <span class="icon is-small"><i class="fas fa-heart"></i></span>
-        </a>
-      </div>
-    </nav>
-  </div>
-</article>-->
+  <%= thought.content %>
+  <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+  <br>
+  <time datetime="<%= thought.created_at.strftime("%Y-%m-%d") %>">
+    <small>
+      <%= time_ago_in_words thought.created_at %> ago by
+      <% if user_signed_in? && current_user == thought.user %>
+        <strong>you</strong> -
+      <% else %>
+        <strong><%= thought.user_id %></strong> -
+      <% end %>
+      <%= thought.created_at.strftime("%l:%M %p - %e %b %Y") %>
+    </small>
+  </time>
+</div>
+
+
+-->

@@ -1,17 +1,12 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# Creates an admin user and one hundred Users named user_0 through user_99 with
+# a random email address.
 
-# This model initially had no columns defined. If you add columns to the
-# model remove the "{}" from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
 admin:
-  email: admin@special.streams
+  email: admin@admin.streams
   encrypted_password: <%= Devise::Encryptor.digest(User, "admin-password") %>
 
-one:
-  email: <%= "#{Faker::Movies::StarWars.character.downcase.gsub(/\s/, '_')}@#{Faker::Movies::StarWars.planet.downcase.gsub(/\s/, '_')}.rhuidean.net" %>
-  encrypted_password: <%= Devise::Encryptor.digest(User, "one-password") %>
-
-two:
-  email: <%= "#{Faker::Movies::StarWars.character.downcase.gsub(/\s/, '_')}@#{Faker::Movies::StarWars.planet.downcase.gsub(/\s/, '_')}.rhuidean.net" %>
-  encrypted_password: <%= Devise::Encryptor.digest(User, "two-password") %>
+<% 100.times do |i| %>
+user_<%= i %>:
+  email: <%= "#{Faker::Movies::StarWars.character.downcase.gsub(/\s/, '_')}_#{rand(1000..9999)}@#{Faker::Movies::StarWars.specie.downcase.gsub(/\s/, '_')}.#{Faker::Movies::StarWars.planet.downcase.gsub(/\s/, '_')}.#{Faker::Internet.domain_suffix}" %>
+  encrypted_password: <%= Devise::Encryptor.digest(User, "password") %>
+<% end %>

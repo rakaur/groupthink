@@ -1,2 +1,10 @@
 /* Application styles */
 @import "https://unpkg.com/bulmaswatch/pulse/bulmaswatch.min.css";
+
+.hero-foot > .tabs a {
+  color: #ffffff !important;
+}
+
+.hero-foot > .tabs > ul > li.is-active a {
+  color: #8e44ad !important;
+}

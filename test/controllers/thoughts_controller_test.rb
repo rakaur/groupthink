@@ -2,7 +2,7 @@ require "test_helper"
 
 class ThoughtsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @thought = thoughts(:one)
+    @thought = thoughts(:thought_1)
   end
 
   test "should get index" do

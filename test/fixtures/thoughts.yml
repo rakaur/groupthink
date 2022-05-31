@@ -1,14 +1,16 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-<% 100.times do |i| %>
+# Creates a thousand Thoughts named thought_0 to thought_999 with random content,
+# a random creation time within the last five years, belonging to a random user
+
+<% 1000.times do |i| %>
 thought_<%= i %>:
   content: <%= Faker::Movies::StarWars.quote %>
-  user: admin
+  user: <%= (0 ... 100).to_a.map { |i| "user_#{i}" }.prepend("admin").sample %>
+  created_at: <%= Faker::Time.between_dates from: 5.years.ago, to: Time.now.beginning_of_day %>
 <% end %>
 
-one:
+<% 20.times do |i| %>
+admin_thought_<%= i %>:
   content: <%= Faker::Movies::StarWars.quote %>
-  user: one
-
-two:
-  content: <%= Faker::Movies::StarWars.quote %>
-  user: two
+  user: admin
+  created_at: <%= Faker::Time.between_dates from: 5.years.ago, to: Time.now.beginning_of_day %>
+<% end %>

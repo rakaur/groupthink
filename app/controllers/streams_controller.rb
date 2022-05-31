@@ -3,7 +3,8 @@ class StreamsController < ApplicationController
 
   # GET /streams or /streams.json
   def index
-    @streams = Stream.all
+    @streams = current_user.streams if user_signed_in?
+    @streams ||= Stream.where(id: Stream.first.id)
   end
 
   # GET /streams/1 or /streams/1.json
