@@ -5,5 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :lockable, :trackable
 
+  has_and_belongs_to_many :streams
   has_many :thoughts
 end

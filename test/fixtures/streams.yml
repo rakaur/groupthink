@@ -1,7 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   content: { 'all': true }
+  users: admin, one, two
 
 two:
-  content: { 'user_id': 1 }
+  id: 2
+  content: { 'user_id': <%= ActiveRecord::FixtureSet.identify(:one) %> }
+  users: admin
