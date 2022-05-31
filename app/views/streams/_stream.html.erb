@@ -3,11 +3,15 @@
     <p class="is-size-4 has-text-centered">
       stream #<%= stream.id %>
     </p>
+    <p class="has-text-centered">
+      <%= stream.thoughts&.count %> total,
+      <%= stream.thoughts&.limit(10)&.count %> shown
+    </p>
   </div>
 
   <hr />
 
-  <% stream.thoughts.each do |thought| %>
+  <% stream.thoughts&.limit(10)&.each do |thought| %>
     <%= render thought %>
   <% end %>
 </div>

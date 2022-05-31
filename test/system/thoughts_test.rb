@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class ThoughtsTest < ApplicationSystemTestCase
   setup do
-    @thought = thoughts(:one)
+    @thought = thoughts(:thought_1)
   end
 
   test "visiting the index" do

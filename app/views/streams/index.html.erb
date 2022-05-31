@@ -1,14 +1,58 @@
-<p style="color: green"><%= notice %></p>
+<section class="hero is-primary is-small">
+  <div class="hero-head">
+    <%= render "shared/navbar" %>
+  </div>
 
-<h1>Streams</h1>
+  <div class="hero-body">
+  </div>
+  <div class="hero-foot">
+    <div class="tabs is-centered is-boxed">
+      <ul>
+        <li class="is-active">
+          <a>
+            <span class="icon is-small"><i class="fas fa-list" aria-hidden="true"></i></span>
+            <span>Streams</span>
+          </a>
+        </li>
+        <li>
+          <a>
+            <span class="icon is-small"><i class="fas fa-gear" aria-hidden="true"></i></span>
+            <span>Settings</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-<div id="streams">
-  <% @streams.each do |stream| %>
-    <%= render stream %>
-    <p>
-      <%= link_to "Show this stream", stream %>
-    </p>
-  <% end %>
-</div>
+<section class="section">
+  <div class="columns is-fullheight">
+    <div class="column">
+      <%= render current_user.default_stream %>
+    </div>
 
-<%= link_to "New stream", new_stream_path %>
+    <% @streams.limit(2).find_each do |stream| %>
+    <div class="column">
+      <%= render stream %>
+    </div>
+    <% end %>
+
+    <div class="column box is-2">
+      <div class="box">
+        <p class="is-size-4 has-text-centered">extra column!</p>
+        <p class="has-text-centered">
+          Interactive Column, display settings maybe? Detail pane?
+        </p>
+      </div>
+
+      <% if true %>
+        <%= render 'shared/notification', type: :danger, body: 'alert. some stuff happened. whats this look like?' %>
+      <% end %>
+      <% if notice %>
+        <%= render 'shared/message', type: :info, body: notice %>
+      <% end %>
+
+
+    </div> <!-- class="column" -->
+  </div> <!-- class="columns" -->
+</section>
