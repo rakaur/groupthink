@@ -37,6 +37,16 @@ container, and the entry point will be `rails server`. You will need
 to set `POSTGRES_PASSWORD` in `.env` for initial setup of the database
 container. See `.env-example`.
 
+The file `db/seeds.rb` contains data essential for a brand new database to
+function properly (that the app assumes is always there, essentially). Seed data
+will always load for production. For development, the data modeled within
+`tests/fixtures/` can be loaded into the development database by running:
+
+  `$ rails db:fixtures:load`
+
+This is the data I use for development, and it is designed with both development
+and testing in mind.
+
 ### Database
 
 In lieu of CLI flags, Rails uses `RAILS_ENV` to determine the current

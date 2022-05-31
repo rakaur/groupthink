@@ -1,4 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+<% 100.times do |i| %>
+thought_<%= i %>:
+  content: <%= Faker::Movies::StarWars.quote %>
+  user: admin
+<% end %>
 
 one:
   content: <%= Faker::Movies::StarWars.quote %>

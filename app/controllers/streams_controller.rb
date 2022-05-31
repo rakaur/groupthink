@@ -1,6 +1,5 @@
 class StreamsController < ApplicationController
   before_action :set_stream, only: %i[ show edit update destroy ]
-  before_action :set_thoughts, only: %i[ show ]
 
   # GET /streams or /streams.json
   def index
@@ -67,10 +66,5 @@ class StreamsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def stream_params
       params.require(:stream).permit(:content)
-    end
-
-    def set_thoughts
-      return @thoughts = Thought.where(created_at: 1.month.ago .. Time.now) if @stream.content['all']
-      @thoughts = Thought.where(@stream.content)
     end
 end

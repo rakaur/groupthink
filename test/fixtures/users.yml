@@ -5,7 +5,7 @@
 # below each fixture, per the syntax in the comments below
 #
 admin:
-  email: admin@rhuidean.net
+  email: admin@special.streams
   encrypted_password: <%= Devise::Encryptor.digest(User, "admin-password") %>
 
 one:
