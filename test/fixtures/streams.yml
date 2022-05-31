@@ -2,6 +2,8 @@
 
 one:
   content: { 'all': true }
+  users: admin, one, two
 
 two:
   content: { 'user_id': 1 }
+  users: admin

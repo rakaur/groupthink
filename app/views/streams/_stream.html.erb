@@ -1,7 +1,13 @@
-<div id="<%= dom_id stream %>">
-  <p>
-    <strong>Content:</strong>
-    <%= stream.content %>
-  </p>
+<div id="<%= dom_id stream %>" class="box">
+  <div class="block">
+    <p class="is-size-4 has-text-centered">
+      stream #<%= stream.id %>
+    </p>
+  </div>
 
+  <hr />
+
+  <% stream.thoughts.each do |thought| %>
+    <%= render thought %>
+  <% end %>
 </div>

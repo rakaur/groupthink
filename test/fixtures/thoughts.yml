@@ -2,8 +2,8 @@
 
 one:
   content: <%= Faker::Movies::StarWars.quote %>
-  user_id: 1
+  user: one
 
 two:
   content: <%= Faker::Movies::StarWars.quote %>
-  user_id: 2
+  user: two
