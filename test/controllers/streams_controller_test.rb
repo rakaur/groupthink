@@ -23,9 +23,9 @@ class StreamsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to stream_url(Stream.last)
   end
 
-  test "should show stream" do
+  test "shouldn't show stream" do
     get stream_url(@stream)
-    assert_response :success
+    assert_redirected_to streams_url
   end
 
   test "should get edit" do
