@@ -1,22 +1,22 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+# Accurate representation of the "default stream"
+# Show all Thoughts created within the last month
 one:
   id: 1
-  content:
-      all: true
+  created_ago: <%= 1.month %>
 
+# Used by admin and 20 random others
+# Show all Thoughts ever created by admin
 two:
   id: 2
   users: admin, <%= (0 ... 100).to_a.map { |i| "user_#{i}" }.sample(20).join(", ") %>
-  content:
-    where:
-      user_id: <%= ActiveRecord::FixtureSet.identify(:admin) %>
+  author_ids: [<%= ActiveRecord::FixtureSet.identify(:admin) %>]
 
+# Used by admin a 20 random others
+# Show all Thoughts created by a random user within the last year
 three:
   id: 3
   users: admin, <%= (0 ... 100).to_a.map { |i| "user_#{i}" }.sample(20).join(", ") %>
-  content:
-    created_ago_start: <%= 3.years.to_json %>
-    created_ago_stop: <%= 1.year.to_json %>
-    where:
-      user_id: <%= ActiveRecord::FixtureSet.identify((0 ... 100).to_a.map { |i| :"user_#{i}" }.sample) %>
+  author_ids: [<%= ActiveRecord::FixtureSet.identify((0 ... 100).to_a.map { |i| :"user_#{i}" }.sample) %>]
+  created_ago: <%= 1.year %>
