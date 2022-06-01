@@ -9,7 +9,7 @@
     <div class="tabs is-centered is-boxed">
       <ul>
         <li class="is-active">
-          <a>
+          <a href="<%= streams_path %>">
             <span class="icon is-small"><i class="fas fa-list" aria-hidden="true"></i></span>
             <span>Streams</span>
           </a>
@@ -51,7 +51,6 @@
       <% if notice %>
         <%= render 'shared/message', type: :info, body: notice %>
       <% end %>
-
 
     </div> <!-- class="column" -->
   </div> <!-- class="columns" -->

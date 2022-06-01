@@ -1,6 +1,7 @@
 /* Application styles */
 @import "https://unpkg.com/bulmaswatch/pulse/bulmaswatch.min.css";
 
+/* Fix for bulma tags inside a hero */
 .hero-foot > .tabs a {
   color: #ffffff !important;
 }

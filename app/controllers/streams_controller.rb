@@ -9,6 +9,10 @@ class StreamsController < ApplicationController
 
   # GET /streams/1 or /streams/1.json
   def show
+    respond_to do |format|
+      format.html { redirect_to streams_url }
+      format.json
+    end
   end
 
   # GET /streams/new
