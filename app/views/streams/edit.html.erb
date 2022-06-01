@@ -1,10 +1,57 @@
-<h1>Editing stream</h1>
+<section class="hero is-primary is-small">
+  <div class="hero-head">
+    <%= render "shared/navbar" %>
+  </div>
 
-<%= render "form", stream: @stream %>
+  <div class="hero-body">
+  </div>
+  <div class="hero-foot">
+    <div class="tabs is-centered is-boxed">
+      <ul>
+        <li class="is-active">
+          <a href="<%= streams_path %>">
+            <span class="icon is-small"><i class="fas fa-list" aria-hidden="true"></i></span>
+            <span>Streams</span>
+          </a>
+        </li>
+        <li>
+          <a>
+            <span class="icon is-small"><i class="fas fa-gear" aria-hidden="true"></i></span>
+            <span>Settings</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-<br>
+<section class="section">
+  <div class="columns is-fullheight">
+    <div class="column is-one-quarter">
+      <% if alert %>
+        <%= render 'shared/notification', type: :danger, body: alert %>
+      <% end %>
+      <% if notice %>
+        <%= render 'shared/notification', type: :info, body: notice %>
+      <% end %>
 
-<div>
-  <%= link_to "Show this stream", @stream %> |
-  <%= link_to "Back to streams", streams_path %>
-</div>
+      <div class="box">
+        <p class="is-size-4 has-text-centered">edit stream #<%= @stream.id %></p>
+
+        <hr />
+
+        <%= render "form", stream: @stream %>
+      </div>
+
+      <div class="box">
+        <p class="is-size-4 has-text-centered">extra column!</p>
+        <p class="has-text-centered">
+          Interactive Column, display settings maybe? Detail pane?
+        </p>
+      </div>
+    </div>
+    <div class="column is-two-quarters">
+      <%= render @stream %>
+    </div> <!-- class="column" -->
+  </div> <!-- class="columns" -->
+</section>

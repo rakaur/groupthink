@@ -1,5 +1,17 @@
 <div id="<%= dom_id stream %>" class="box">
   <div class="block">
+    <nav class="level is-mobile">
+      <div class="level-left">
+      </div>
+      <div class="level-right">
+        <% unless current_page?(edit_stream_path(stream)) || stream.id == 1 %>
+          <a class="level-item" href="<%= edit_stream_path(stream) %>">
+            <span class="icon is-small"><i class="fas fa-gear"></i></span>
+          </a>
+        <% end %>
+      </div>
+    </nav>
+
     <p class="is-size-4 has-text-centered">
       stream #<%= stream.id %>
     </p>
