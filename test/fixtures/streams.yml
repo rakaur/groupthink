@@ -3,22 +3,20 @@
 one:
   id: 1
   content:
-    -
       all: true
 
 two:
   id: 2
   users: admin, <%= (0 ... 100).to_a.map { |i| "user_#{i}" }.sample(20).join(", ") %>
   content:
-    -
-      where:
-        user_id: <%= ActiveRecord::FixtureSet.identify(:admin) %>
+    where:
+      user_id: <%= ActiveRecord::FixtureSet.identify(:admin) %>
 
 three:
   id: 3
   users: admin, <%= (0 ... 100).to_a.map { |i| "user_#{i}" }.sample(20).join(", ") %>
   content:
-    -
-      created_range: "6.years.ago .. 5.years.ago"
-      where:
-        user_id: <%= ActiveRecord::FixtureSet.identify((0 ... 100).to_a.map { |i| :"user_#{i}" }.sample) %>
+    created_ago_start: <%= 3.years.to_json %>
+    created_ago_stop: <%= 1.year.to_json %>
+    where:
+      user_id: <%= ActiveRecord::FixtureSet.identify((0 ... 100).to_a.map { |i| :"user_#{i}" }.sample) %>
