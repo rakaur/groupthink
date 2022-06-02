@@ -1,4 +1,8 @@
 ENV["RAILS_ENV"] ||= "test"
+
+require "simplecov"
+SimpleCov.start { add_filter "/test/" }
+
 require_relative "../config/environment"
 require "rails/test_help"
 

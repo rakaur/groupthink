@@ -1,6 +1,8 @@
 class Stream < ApplicationRecord
   has_and_belongs_to_many :users
 
+  LOGFILE = Rails.root.join("log/stream_thoughts.log")
+
   # Returns all Thoughts that match the Stream's filter fields
   # Accepts an optional limit to override the Stream's own limit (if present)
   #
@@ -55,118 +57,106 @@ class Stream < ApplicationRecord
   #     note: will be ignored if present alongside `updated`
   #
   def thoughts(my_limit = nil)
-    puts "#" * 80
-    puts "Processing Thoughts for Stream#{id}"
+    announce "#thoughts"
 
     thoughts = Thought.all
     my_limit ||= limit
 
+    say_with_time "processing filter" do
     # string[] -> Array of Strings
     # TODO: implement tags
     if all_tags.present?
-      puts "Would search for all tags"
+      # say "all_tags: ", true
     end
 
     # string[] -> Array of Strings
     # TODO: implement tags
     if any_tags.present?
-      puts "Would search for any tags"
+      # say "any_tags: ", true
     end
 
     # bigint[] -> Array of Integers
     if author_ids.present?
-      puts "Selecting Thoughts by user #{author_ids.inspect}"
+      say "author_ids: #{author_ids.inspect}", true
+
       thoughts = thoughts.where(user: author_ids)
     end
 
     # string -> String
     # TODO: pg_search
     if content.present?
-      puts "Would search for content"
+      # say "content: ", true
     end
 
     # datetime -> ActiveSupport::TimeWithZone
     if created.present?
-      puts "Selecting Thoughts created_at #{created.inspect}"
+      say "created: #{created.inspect}", true
       thoughts = thoughts.where(created_at: created)
     end
 
     # interval -> ActiveSupport::Duration
     if created_ago.present? && created.blank?
-      puts "Selecting Thoughts by created_ago #{created_ago.inspect}"
+      say "created_ago: #{created_ago.inspect}", true
       thoughts = thoughts.where(created_at: created_ago.ago .. Time.current)
     end
 
     # daterange -> Range(Date .. Date)
     if created_range.present? && created.blank?
-      puts "Selecting Thoughts by created_range #{created_range.inspect}"
+      say "created_range: #{created_range.inspect}", true
       thoughts = thoughts.where(created_at: created_range)
     end
 
     # datetime -> ActiveSupport::TimeWithZone
     if updated.present?
-      puts "Selecting Thoughts updated_at #{updated.inspect}"
-      thoughts = thoughts.where(updated_at: created)
+      say "updated: #{updated.inspect}", true
+      thoughts = thoughts.where(updated_at: updated)
     end
 
     # interval -> ActiveSupport::Duration
     if updated_ago.present? && updated.blank?
-      puts "Selecting Thoughts by updated_ago #{updated_ago.inspect}"
+      say "updated_ago: #{updated_ago.inspect}", true
       thoughts = thoughts.where(updated_at: updated_ago.ago .. Time.current)
     end
 
     # daterange -> Range(Date .. Date)
     if updated_range.present? && updated.blank?
-      puts "Selecting Thoughts by updated_range #{updated_range.inspect}"
-      thoughts = thoughts.where(created_at: updated_range)
+      say "updated_range: #{updated_range.inspect}", true
+      thoughts = thoughts.where(updated_at: updated_range)
     end
 
+    thoughts.count
+    end
+    announce "complete"
     my_limit ? thoughts&.limit(my_limit) : thoughts
   end
+
+  private
+    def logger
+      @logger ||= Logger.new(LOGFILE)
+
+      @logger.formatter = proc do |severity, datetime, progname, msg|
+        "[#{datetime.strftime("%Y-%m-%d %H:%M:%S")}] [#{severity.downcase}] #{msg}\n"
+      end
+
+      @logger
+    end
+
+    def announce(message)
+      text = "#{id} Stream: #{message}"
+      length = [0, 45 - text.length].max
+      logger.debug "== %s %s" % [text, "=" * length]
+    end
+
+    def say(message, subitem = false)
+      logger.debug "#{subitem ? "   ->" : "--"} #{message}"
+    end
+
+    def say_with_time(message)
+      say(message)
+      result = nil
+      time = Benchmark.measure { result = yield }
+      say "%.4fs" % time.real, :subitem
+      say("#{result} rows", :subitem) if result.is_a?(Integer)
+      result
+    end
 end
-
-__END__
-
-  # content = {
-  #   where: {
-  #     user_id: Integer,
-  #     content: String,
-  #     created_at: DateTime,
-  #     updated_at: DateTime
-  #   },
-  #
-  #   all: true,
-  #   created_ago_start: Integer, # number of seconds ago, ActiveSupport::Duration.to_json
-  #   created_ago_stop: Integer
-  # }
-
-  # Returns all matching thoughts
-#   def thoughts(limit = nil)
-#     thoughts = Thought.all
-#
-#
-#     content.each do |key, value|
-#       case key
-#       when "all"
-#         thoughts = thoughts.where(created_at: 1.month.ago .. Time.current)
-#         break
-#       when "created_ago_start"
-#         start = ActiveSupport::Duration.build(content["created_ago_start"].to_i).ago
-#
-#         if content["created_ago_stop"].present?
-#           stop = ActiveSupport::Duration.build(content["created_ago_stop"].to_i).ago
-#         else
-#           stop = Time.current
-#         end
-#
-#         thoughts = thoughts.where(created_at: start .. stop)
-#       when "where"
-#         thoughts = thoughts.where(content[key])
-#       else
-#         # TODO: Unknown key, ignore for now ?
-#       end
-#     end
-#
-#     limit ? thoughts&.order(created_at: :desc)&.limit(limit) : thoughts&.order(created_at: :desc)
-#   end
-# end
