@@ -24,6 +24,8 @@ class StreamsController < ApplicationController
   def edit
   end
 
+  # TODO :reek:TooManyStatements
+  #
   # POST /streams or /streams.json
   def create
     @stream = Stream.new(stream_params)
@@ -39,6 +41,8 @@ class StreamsController < ApplicationController
     end
   end
 
+  # TODO :reek:TooManyStatements
+  #
   # PATCH/PUT /streams/1 or /streams/1.json
   def update
     respond_to do |format|
@@ -52,6 +56,8 @@ class StreamsController < ApplicationController
     end
   end
 
+  # TODO :reek:TooManyStatements
+  #
   # DELETE /streams/1 or /streams/1.json
   def destroy
     @stream.destroy

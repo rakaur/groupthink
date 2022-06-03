@@ -5,10 +5,6 @@ plugins:
     enabled: true
   bundler-audit:
     enabled: true
-  eslint:
-    enabled: true
-  fixme:
-    enabled: true
   flog:
     enabled: true
   markdownlint:

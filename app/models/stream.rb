@@ -1,3 +1,4 @@
+# TODO :reek:SimulatedPolymorphism and :reek:TooManyStatements
 class Stream < ApplicationRecord
   has_and_belongs_to_many :users
 
@@ -139,6 +140,8 @@ class Stream < ApplicationRecord
     thoughts = Thought.all
     my_limit ||= limit
 
+    now = Time.current
+
     log_time "processing filter" do
       # string[] -> Array of Strings
       # TODO: implement tags
@@ -172,13 +175,13 @@ class Stream < ApplicationRecord
       end
 
       # interval -> ActiveSupport::Duration
-      if created_ago.present? && created.blank?
+      if created_ago.present?
         log_sub "created_ago: #{created_ago.inspect}"
-        thoughts = thoughts.where(created_at: created_ago.ago .. Time.current)
+        thoughts = thoughts.where(created_at: created_ago.ago .. now)
       end
 
       # daterange -> Range(Date .. Date)
-      if created_range.present? && created.blank?
+      if created_range.present?
         log_sub "created_range: #{created_range.inspect}"
         thoughts = thoughts.where(created_at: created_range)
       end
@@ -190,13 +193,13 @@ class Stream < ApplicationRecord
       end
 
       # interval -> ActiveSupport::Duration
-      if updated_ago.present? && updated.blank?
+      if updated_ago.present?
         log_sub "updated_ago: #{updated_ago.inspect}"
-        thoughts = thoughts.where(updated_at: updated_ago.ago .. Time.current)
+        thoughts = thoughts.where(updated_at: updated_ago.ago .. now)
       end
 
       # daterange -> Range(Date .. Date)
-      if updated_range.present? && updated.blank?
+      if updated_range.present?
         log_sub "updated_range: #{updated_range.inspect}"
         thoughts = thoughts.where(updated_at: updated_range)
       end
