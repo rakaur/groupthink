@@ -31,14 +31,14 @@
       <%= render @stream %>
     </div>
     <div class="column is-3">
-      <% if alert %>
-        <%= render 'shared/notification', type: :danger, body: alert %>
-      <% end %>
-      <% if notice %>
-        <%= render 'shared/notification', type: :info, body: notice %>
-      <% end %>
-
       <div class="box">
+        <% if alert %>
+          <%= render 'shared/notification', type: :danger, body: alert %>
+        <% end %>
+        <% if notice %>
+          <%= render 'shared/notification', type: :success, body: notice %>
+        <% end %>
+
         <div class="block">
           <%= render "form", stream: @stream %>
         </div>
