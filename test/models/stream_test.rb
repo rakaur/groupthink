@@ -43,7 +43,11 @@ class StreamTest < ActiveSupport::TestCase
     assert_raises(ActiveRecord::RecordInvalid) { @stream.update!(limit: {}) }
     assert_raises(ActiveRecord::RecordInvalid) { @stream.update!(limit: [-1]) }
     assert_raises(ActiveRecord::RecordInvalid) { @stream.update!(limit: "hi") }
-    assert_nothing_raised { @stream.update!(limit: 10) }
+
+    # Limit by itself does not a filter make
+    assert_raises(ActiveRecord::RecordInvalid) { @stream.update!(limit: 10) }
+
+    assert_nothing_raised { @stream.update!(content: "test", limit: 10) }
   end
 
   # test "#thoughts does all_tags" do
@@ -150,6 +154,17 @@ class StreamTest < ActiveSupport::TestCase
   test "#thoughts does updated_range" do
     @stream = streams(:updated_range)
     expected = Thought.where(updated_at: @stream.updated_range)
+
+    actual = @stream.thoughts
+
+    assert_equal expected.count, actual.count
+
+    expected.count.times { |i| assert_equal expected[i], actual[i] }
+  end
+
+  test "#thoughts does multiple" do
+    @stream = streams(:multiple)
+    expected = Thought.where(user: @stream.author_ids, updated_at: @stream.updated_range)
 
     actual = @stream.thoughts
 

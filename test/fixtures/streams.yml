@@ -67,3 +67,8 @@ updated_ago:
 updated_range:
   users: admin
   updated_range: "[2016-09-06, <%= Date.current.to_s %>]"
+
+multiple:
+  users: admin
+  author_ids: [<%= ActiveRecord::FixtureSet.identify(:admin) %>]
+  updated_range: "[<%= 9.months.ago.strftime("%Y-%m-%d") %>, <%= 1.week.ago.strftime("%Y-%m-%d") %>]"

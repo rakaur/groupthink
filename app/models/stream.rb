@@ -69,18 +69,38 @@ class Stream < ApplicationRecord
   end
 
   # invalid unless at least one field is present
-  validate :at_least_one
-  def at_least_one
-    attrs = attribute_names.map(&:to_sym).reject do |attr|
-      attr if self.send(attr).blank? || attr.in?(%i[ id created_at updated_at ])
-    end
-
-    unless attrs.present?
-      errors.add(:base, "at least one attribute must be present")
-    end
+  validate do
+    errors.add(:base, "at least one attribute must be present") unless filter_attributes.present?
   end
 
   LOGFILE = Rails.root.join("log/stream_thoughts.log")
+
+  # Maps an attribute to the value that needs to be fed to `Thought.where`
+  #
+  # The value is a proc/lambda that returns a Hash or String that gets passed
+  # to `Thought.where` for filtering.
+  #
+  QUERY_MAP = {
+    # TODO: tags, pg_search content
+    # %i[ all_tags ] =>
+    #   ->(attr, value) { %Q[tags @> "{#{value.join(',')}}"] },
+
+    # %i[ any_tags ] =>
+    #   ->(attr, value) { %Q[tags <@ "{#{value.join(',')}}"] },
+
+    %i[ author_ids ] =>
+      ->(attr, value) { { user: value } },
+
+    %i[ created updated ] =>
+      ->(attr, value) { { "#{attr}_at" => value } },
+
+    %i[ created_ago updated_ago ] =>
+      ->(attr, value) { { "#{attr[0, 7]}_at" => value.ago .. Time.current } },
+
+    %i[ created_range updated_range ] =>
+      ->(attr, value) { { "#{attr[0, 7]}_at" => value } }
+  }
+  QUERY_MAP.default = ->(attr, value) { { attr => value } }
 
   # Returns all Thoughts that match the Stream's filter fields
   # Accepts an optional limit to override the Stream's own limit (if present)
@@ -135,83 +155,38 @@ class Stream < ApplicationRecord
   #     note: validation error if present alongside `updated`
   #
   def thoughts(my_limit = nil)
+    my_limit ||= limit
+    thoughts = Thought.all
+
     log_title "#thoughts"
 
-    thoughts = Thought.all
-    my_limit ||= limit
-
-    now = Time.current
-
     log_time "processing filter" do
-      # string[] -> Array of Strings
-      # TODO: implement tags
-      if all_tags.present?
-        # log_sub "all_tags: "
-      end
+      filter_attributes.each do |attr|
+        value = self.send(attr)
 
-      # string[] -> Array of Strings
-      # TODO: implement tags
-      if any_tags.present?
-        # log_sub "any_tags: "
-      end
+        log_sub "#{attr}: #{value}"
 
-      # bigint[] -> Array of Integers
-      if author_ids.present?
-        log_sub "author_ids: #{author_ids.inspect}"
+        key = QUERY_MAP.keys.find { |key| attr == key || attr.in?(key) }
+        fmt = QUERY_MAP.fetch(key, QUERY_MAP.default)
 
-        thoughts = thoughts.where(user: author_ids)
-      end
-
-      # string -> String
-      # TODO: pg_search
-      if content.present?
-        # log_sub "content: "
-      end
-
-      # datetime -> ActiveSupport::TimeWithZone
-      if created.present?
-        log_sub "created: #{created.inspect}"
-        thoughts = thoughts.where(created_at: created)
-      end
-
-      # interval -> ActiveSupport::Duration
-      if created_ago.present?
-        log_sub "created_ago: #{created_ago.inspect}"
-        thoughts = thoughts.where(created_at: created_ago.ago .. now)
-      end
-
-      # daterange -> Range(Date .. Date)
-      if created_range.present?
-        log_sub "created_range: #{created_range.inspect}"
-        thoughts = thoughts.where(created_at: created_range)
-      end
-
-      # datetime -> ActiveSupport::TimeWithZone
-      if updated.present?
-        log_sub "updated: #{updated.inspect}"
-        thoughts = thoughts.where(updated_at: updated)
-      end
-
-      # interval -> ActiveSupport::Duration
-      if updated_ago.present?
-        log_sub "updated_ago: #{updated_ago.inspect}"
-        thoughts = thoughts.where(updated_at: updated_ago.ago .. now)
-      end
-
-      # daterange -> Range(Date .. Date)
-      if updated_range.present?
-        log_sub "updated_range: #{updated_range.inspect}"
-        thoughts = thoughts.where(updated_at: updated_range)
+        thoughts = thoughts.where(fmt.call(attr, value))
       end
 
       thoughts.count
     end
 
     log_title "complete"
-    my_limit ? thoughts&.limit(my_limit) : thoughts
+    my_limit ? thoughts.limit(my_limit) : thoughts
   end
 
   private
+    # Returns a list of attribute names as symbols, removing empties and extras
+    def filter_attributes
+      attribute_names.map(&:to_sym).reject do |attr|
+        attr if self.send(attr).blank? || attr.in?(%i[ id created_at limit updated_at ])
+      end
+    end
+
     def logger
       @logger ||= Logger.new(LOGFILE)
 
