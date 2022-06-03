@@ -17,10 +17,18 @@ class StreamsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create stream" do
     assert_difference("Stream.count") do
-      post streams_url, params: { stream: { content: @stream.content } }
+      post streams_url, params: { stream: { content: "test" } }
     end
 
     assert_redirected_to stream_url(Stream.last)
+  end
+
+  test "shouldn't create stream" do
+    assert_no_difference("Stream.count") do
+      post streams_url, params: { stream: { created_ago: "garbage" } }
+    end
+
+    assert_response :unprocessable_entity
   end
 
   test "shouldn't show stream" do
@@ -34,8 +42,13 @@ class StreamsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update stream" do
-    patch stream_url(@stream), params: { stream: { content: @stream.content } }
+    patch stream_url(@stream), params: { stream: { content: "test" } }
     assert_redirected_to stream_url(@stream)
+  end
+
+  test "shouldn't update stream" do
+    patch stream_url(@stream), params: { stream: { created_ago: "garbage" } }
+    assert_response :unprocessable_entity
   end
 
   test "should destroy stream" do

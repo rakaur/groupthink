@@ -19,6 +19,8 @@ class ThoughtsController < ApplicationController
   def edit
   end
 
+  # TODO :reek:TooManyStatements
+  #
   # POST /thoughts or /thoughts.json
   def create
     @thought = Thought.new(thought_params)
@@ -34,6 +36,8 @@ class ThoughtsController < ApplicationController
     end
   end
 
+  # TODO :reek:TooManyStatements
+  #
   # PATCH/PUT /thoughts/1 or /thoughts/1.json
   def update
     respond_to do |format|
@@ -47,6 +51,8 @@ class ThoughtsController < ApplicationController
     end
   end
 
+  # TODO :reek:TooManyStatements
+  #
   # DELETE /thoughts/1 or /thoughts/1.json
   def destroy
     @thought.destroy

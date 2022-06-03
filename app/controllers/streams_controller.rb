@@ -24,6 +24,8 @@ class StreamsController < ApplicationController
   def edit
   end
 
+  # TODO :reek:TooManyStatements
+  #
   # POST /streams or /streams.json
   def create
     @stream = Stream.new(stream_params)
@@ -39,6 +41,8 @@ class StreamsController < ApplicationController
     end
   end
 
+  # TODO :reek:TooManyStatements
+  #
   # PATCH/PUT /streams/1 or /streams/1.json
   def update
     respond_to do |format|
@@ -52,6 +56,8 @@ class StreamsController < ApplicationController
     end
   end
 
+  # TODO :reek:TooManyStatements
+  #
   # DELETE /streams/1 or /streams/1.json
   def destroy
     @stream.destroy
@@ -70,6 +76,8 @@ class StreamsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def stream_params
-      params.require(:stream).permit(:content)
+      params.require(:stream).permit(%i[ all_tags any_tags author_ids content
+                                         created created_ago created_range limit
+                                         updated updated_ago updated_range ])
     end
 end

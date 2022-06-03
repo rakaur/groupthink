@@ -1,4 +1,10 @@
 ENV["RAILS_ENV"] ||= "test"
+
+require "simplecov"
+# require "simplecov_json_formatter"
+# SimpleCov.formatter = SimpleCov::Formatter::JSONFormatter
+SimpleCov.start { add_filter "/test/" }
+
 require_relative "../config/environment"
 require "rails/test_help"
 

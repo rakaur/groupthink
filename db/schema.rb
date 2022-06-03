@@ -15,7 +15,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_31_010419) do
   enable_extension "plpgsql"
 
   create_table "streams", force: :cascade do |t|
-    t.jsonb "content", default: "{}", null: false
+    t.string "all_tags", array: true
+    t.string "any_tags", array: true
+    t.bigint "author_ids", array: true
+    t.string "content"
+    t.datetime "created"
+    t.interval "created_ago"
+    t.daterange "created_range"
+    t.integer "limit"
+    t.datetime "updated"
+    t.interval "updated_ago"
+    t.daterange "updated_range"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

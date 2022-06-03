@@ -27,3 +27,6 @@
 # Ignore .env secrets
 .env
 
+# Ignore unit test coverage report
+/coverage
+

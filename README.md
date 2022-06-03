@@ -1,9 +1,10 @@
 # Streams
 
 [![Ruby on Rails CI](https://github.com/rakaur/streams/actions/workflows/rubyonrails.yml/badge.svg)](https://github.com/rakaur/streams/actions/workflows/rubyonrails.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/2581ad79c4d6576a4bfa/maintainability)](https://codeclimate.com/github/rakaur/streams/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/2581ad79c4d6576a4bfa/test_coverage)](https://codeclimate.com/github/rakaur/streams/test_coverage)
 [![CodeQL](https://github.com/rakaur/streams/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/rakaur/streams/actions/workflows/codeql-analysis.yml)
 [![Brakeman Scan](https://github.com/rakaur/streams/actions/workflows/brakeman.yml/badge.svg)](https://github.com/rakaur/streams/actions/workflows/brakeman.yml)
-
 
 * Repository was created with:
 
@@ -79,21 +80,6 @@ and system tests.
 
 System tests utilizes capybara and selenium. You will need chromedriver and
 Google Chrome installed. The system tests will not run in the docker image.
-
-## Deployment
-
-### Docker
-
-Deployment with docker should be fairly painless? I've never actually used a
-container hosting service but from what I've read AWS ECS works in a manner
-similar to docker-compose. Pass the right environment variables to the container
-and you should be all set.
-
-### Heroku
-
-Deployment with heroku is push-and-done. Since heroku doesn't run the entry
-point script, you may have to run database migrations. Heroku runs `db:setup` so
-your first push should work, but `db:setup` does not run migrations.
 
 ---
 

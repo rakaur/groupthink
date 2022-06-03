@@ -10,7 +10,7 @@ user = User.create email: "admin@admin.streams"
 user.password = "admin-password"
 user.save!
 
-stream = Stream.create content: { all: true }
+stream = Stream.create created_ago: 1.month
 stream.save!
 
 thought = Thought.create content: "Abandon all hope ye who enter here", user: user
