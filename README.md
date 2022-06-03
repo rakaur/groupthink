@@ -1,10 +1,11 @@
 # Streams
 
 [![Ruby on Rails CI](https://github.com/rakaur/streams/actions/workflows/rubyonrails.yml/badge.svg)](https://github.com/rakaur/streams/actions/workflows/rubyonrails.yml)
-[![Maintainability](https://api.codeclimate.com/v1/badges/2581ad79c4d6576a4bfa/maintainability)](https://codeclimate.com/github/rakaur/streams/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/2581ad79c4d6576a4bfa/test_coverage)](https://codeclimate.com/github/rakaur/streams/test_coverage)
 [![CodeQL](https://github.com/rakaur/streams/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/rakaur/streams/actions/workflows/codeql-analysis.yml)
 [![Brakeman Scan](https://github.com/rakaur/streams/actions/workflows/brakeman.yml/badge.svg)](https://github.com/rakaur/streams/actions/workflows/brakeman.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/2581ad79c4d6576a4bfa/maintainability)](https://codeclimate.com/github/rakaur/streams/maintainability)
+[![codebeat badge](https://codebeat.co/badges/ea01eed3-d3b7-47fe-b473-e5b0bc49369e)](https://codebeat.co/projects/github-com-rakaur-streams-main)
 
 * Repository was created with:
 

@@ -22,7 +22,7 @@
 
   <hr />
 
-  <% stream.thoughts&.limit(10)&.each do |thought| %>
+  <% stream.thoughts.order(created_at: :desc).limit(10).each do |thought| %>
     <%= render thought %>
   <% end %>
 </div>

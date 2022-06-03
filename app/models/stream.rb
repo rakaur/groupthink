@@ -1,5 +1,7 @@
 # TODO :reek:SimulatedPolymorphism and :reek:TooManyStatements
 class Stream < ApplicationRecord
+  LOGFILE = Rails.root.join("log/stream_thoughts.log")
+
   has_and_belongs_to_many :users
 
   # Make sure our users exist
@@ -18,7 +20,7 @@ class Stream < ApplicationRecord
   # `created` and `updated` must be a datetime
   #
   # I've tried and failed to get AR to pass anything but a valid date or nil to
-  # a datime field so I've removed the validations.
+  # a datetime field so I've removed the validations.
   #
 
   # `created_ago` and `updated_ago` must be an interval
@@ -70,10 +72,10 @@ class Stream < ApplicationRecord
 
   # invalid unless at least one field is present
   validate do
-    errors.add(:base, "at least one attribute must be present") unless filter_attributes.present?
+    unless present_filter_attributes.present?
+      errors.add(:base, "at least one attribute must be present")
+    end
   end
-
-  LOGFILE = Rails.root.join("log/stream_thoughts.log")
 
   # Maps an attribute to the value that needs to be fed to `Thought.where`
   #
@@ -101,6 +103,8 @@ class Stream < ApplicationRecord
       ->(attr, value) { { "#{attr[0, 7]}_at" => value } }
   }
   QUERY_MAP.default = ->(attr, value) { { attr => value } }
+
+  NON_FILTER_ATTRIBUTES = %i[ id created_at limit updated_at ]
 
   # Returns all Thoughts that match the Stream's filter fields
   # Accepts an optional limit to override the Stream's own limit (if present)
@@ -161,7 +165,7 @@ class Stream < ApplicationRecord
     log_title "#thoughts"
 
     log_time "processing filter" do
-      filter_attributes.each do |attr|
+      present_filter_attributes.each do |attr|
         value = send(attr)
 
         log_sub "#{attr}: #{value}"
@@ -176,15 +180,24 @@ class Stream < ApplicationRecord
     end
 
     log_title "complete"
-    my_limit ? thoughts.limit(my_limit) : thoughts
+
+    my_limit.nil? || my_limit.zero? ? thoughts : thoughts.limit(my_limit)
+  end
+
+  # Returns a list the model's attributes used for filtering
+  def all_filter_attributes
+    attribute_names.map(&:to_sym).reject { |attr| attr.in?(non_filter_attributes) }
   end
 
   private
-    # Returns a list of attribute names as symbols, removing empties and extras
-    def filter_attributes
-      attribute_names.map(&:to_sym).reject do |attr|
-        attr if send(attr).blank? || attr.in?(%i[ id created_at limit updated_at ])
-      end
+    # Returns a list of the model's attributes used for filtering, minus empties
+    def present_filter_attributes
+      all_filter_attributes.reject { |attr| send(attr).blank? }
+    end
+
+    # A list of the model's attributes not used for filtering
+    def non_filter_attributes
+      NON_FILTER_ATTRIBUTES
     end
 
     def logger

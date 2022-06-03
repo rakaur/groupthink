@@ -27,7 +27,10 @@
 
 <section class="section">
   <div class="columns is-fullheight">
-    <div class="column is-one-quarter">
+    <div class="column">
+      <%= render @stream %>
+    </div>
+    <div class="column is-3">
       <% if alert %>
         <%= render 'shared/notification', type: :danger, body: alert %>
       <% end %>
@@ -36,22 +39,10 @@
       <% end %>
 
       <div class="box">
-        <p class="is-size-4 has-text-centered">edit stream #<%= @stream.id %></p>
-
-        <hr />
-
-        <%= render "form", stream: @stream %>
+        <div class="block">
+          <%= render "form", stream: @stream %>
+        </div>
       </div>
-
-      <div class="box">
-        <p class="is-size-4 has-text-centered">extra column!</p>
-        <p class="has-text-centered">
-          Interactive Column, display settings maybe? Detail pane?
-        </p>
-      </div>
-    </div>
-    <div class="column is-two-quarters">
-      <%= render @stream %>
     </div> <!-- class="column" -->
   </div> <!-- class="columns" -->
 </section>
