@@ -45,11 +45,11 @@
         </p>
       </div>
 
-      <% if true %>
-        <%= render 'shared/notification', type: :danger, body: 'alert. some stuff happened. whats this look like?' %>
+      <% if alert %>
+        <%= render 'shared/notification', type: :danger, body: alert %>
       <% end %>
       <% if notice %>
-        <%= render 'shared/message', type: :info, body: notice %>
+        <%= render 'shared/notification', type: :info, body: notice %>
       <% end %>
 
     </div> <!-- class="column" -->

@@ -56,6 +56,11 @@ limit:
   users: admin
   limit: 5
 
+no_limit:
+  users: admin
+  limit: 0
+  created_ago: <%= 1.month %>
+
 updated:
   users: admin
   updated: <%= Time.parse("08:52 6 Sep 2016") %>

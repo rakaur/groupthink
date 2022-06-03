@@ -1,0 +1,31 @@
+<div class="dropdown-item">
+  <div class="field">
+    <%= f.label :limit, "limit", class: "label" %>
+    <p class="control has-icons-left">
+      <%=
+        f.number_field :limit,
+                       autofocus: false,
+                       value: stream.limit.to_i,
+                       placeholder: "limit",
+                       class: "input"
+      %>
+      <span class="icon is-small is-left">
+        <i class="fas fa-hand"></i>
+      </span>
+      <p class="help is-info">
+        setting the limit to zero (0) will disable it
+      </p>
+    </p>
+  </div>
+</div>
+<hr class="dropdown-divider">
+<div class="dropdown-item">
+  <p class="has-text-weight-bold is-italic is-size-6">limit &lt;positive integer&gt;</p>
+</div>
+<hr class="dropdown-divider">
+<div class="dropdown-item">
+  <p class="help is-size-6">
+    the limit filter places a hard limit on how many results will be in the
+    stream, regardless of how many were found by other filters
+  </p>
+</div>

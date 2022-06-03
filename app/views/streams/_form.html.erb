@@ -1,4 +1,4 @@
-<%= form_with(model: stream) do |form| %>
+<%= form_with(model: stream) do |f| %>
   <% if stream.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(stream.errors.count, "error") %> prohibited this stream from being saved:</h2>
@@ -11,12 +11,37 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :content, style: "display: block" %>
-    <%= form.text_field :content %>
-  </div>
+  <nav class="panel is-primary" id="<%= dom_id stream %>">
+    <p class="panel-heading">
+      stream #<%= stream.id %> filters
+    </p>
 
-  <div>
-    <%= form.submit %>
-  </div>
+    <% @stream.all_filter_attributes.append(:limit).sort.each do |attr| %>
+      <% v = @stream.send(attr) %>
+      <label class="panel-block" id="<%= "#{attr}_filter" %>">
+        <div class="dropdown is-hoverable">
+          <div class="dropdown-trigger">
+            <div class="button<%= v ? " is-active" : '' %>" aria-haspopup="true" aria-controls="dropdown-menu3">
+              <span><%= attr.to_s.humanize.downcase %></span>
+            </div>
+
+          </div>
+          <div class="dropdown-menu" id="dropdown-menu2" role="menu">
+            <div class="dropdown-content">
+              <%= render "streams/filters/#{attr}", stream: stream, f: f %>
+            </div>
+          </div>
+        </div>
+      </label>
+    <% end %>
+
+    <div class="panel-block">
+      <button class="button is-link is-outlined is-fullwidth">
+        reset all filters
+      </button>
+    </div>
+    <div class="panel-block">
+      <%= f.submit "save", class: "button is-primary is-outlined is-fullwidth" %>
+    </div>
+  </nav>
 <% end %>

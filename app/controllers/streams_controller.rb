@@ -47,7 +47,7 @@ class StreamsController < ApplicationController
   def update
     respond_to do |format|
       if @stream.update(stream_params)
-        format.html { redirect_to stream_url(@stream), notice: "Stream was successfully updated." }
+        format.html { redirect_to edit_stream_url(@stream), notice: "stream saved" }
         format.json { render :show, status: :ok, location: @stream }
       else
         format.html { render :edit, status: :unprocessable_entity }

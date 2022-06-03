@@ -129,6 +129,16 @@ class StreamTest < ActiveSupport::TestCase
     expected.count.times { |i| assert_equal expected[i], actual[i] }
   end
 
+  test "#thoughts does no limit" do
+    @stream = streams(:no_limit)
+    expected = Thought.where(created_at: @stream.created_ago.ago .. Time.current)
+    actual = @stream.thoughts
+
+    assert_equal expected.count, actual.count
+
+    expected.count.times { |i| assert_equal expected[i], actual[i] }
+  end
+
   test "#thoughts does updated" do
     @stream = streams(:updated)
     expected = Thought.where(updated_at: @stream.updated)

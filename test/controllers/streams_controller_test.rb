@@ -43,7 +43,7 @@ class StreamsControllerTest < ActionDispatch::IntegrationTest
 
   test "should update stream" do
     patch stream_url(@stream), params: { stream: { content: "test" } }
-    assert_redirected_to stream_url(@stream)
+    assert_redirected_to edit_stream_url(@stream)
   end
 
   test "shouldn't update stream" do

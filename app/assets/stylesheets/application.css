@@ -9,3 +9,8 @@
 .hero-foot > .tabs > ul > li.is-active a {
   color: #8e44ad !important;
 }
+
+/* Allows an entire panel-block to be a dropdown */
+.panel-block > div.dropdown, div.dropdown > div.dropdown-trigger, div.dropdown-trigger > div.button {
+  width: 100%;
+}
