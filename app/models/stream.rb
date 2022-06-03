@@ -162,7 +162,7 @@ class Stream < ApplicationRecord
 
     log_time "processing filter" do
       filter_attributes.each do |attr|
-        value = self.send(attr)
+        value = send(attr)
 
         log_sub "#{attr}: #{value}"
 
@@ -183,7 +183,7 @@ class Stream < ApplicationRecord
     # Returns a list of attribute names as symbols, removing empties and extras
     def filter_attributes
       attribute_names.map(&:to_sym).reject do |attr|
-        attr if self.send(attr).blank? || attr.in?(%i[ id created_at limit updated_at ])
+        attr if send(attr).blank? || attr.in?(%i[ id created_at limit updated_at ])
       end
     end
 
