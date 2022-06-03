@@ -70,6 +70,8 @@ class StreamsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def stream_params
-      params.require(:stream).permit(:content)
+      params.require(:stream).permit(%i[ all_tags any_tags author_ids content
+                                         created created_ago created_range limit
+                                         updated updated_ago updated_range ])
     end
 end

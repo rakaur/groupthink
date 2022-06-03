@@ -23,6 +23,14 @@ class ThoughtsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to thought_url(Thought.last)
   end
 
+  test "shouldn't create thought" do
+    assert_no_difference("Thought.count") do
+      post thoughts_url, params: { thought: { user_id: "garbage" } }
+    end
+
+    assert_response :unprocessable_entity
+  end
+
   test "should show thought" do
     get thought_url(@thought)
     assert_response :success
@@ -36,6 +44,11 @@ class ThoughtsControllerTest < ActionDispatch::IntegrationTest
   test "should update thought" do
     patch thought_url(@thought), params: { thought: { content: @thought.content, user_id: @thought.user_id } }
     assert_redirected_to thought_url(@thought)
+  end
+
+  test "shouldn't update thought" do
+    patch thought_url(@thought), params: { thought: { user_id: "garbage" } }
+    assert_response :unprocessable_entity
   end
 
   test "should destroy thought" do
