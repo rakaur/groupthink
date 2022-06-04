@@ -1,0 +1,3 @@
+<% flash.each do |flash_type, message| %>
+  <%= render 'shared/message', flash_type: flash_type, headers: false, body: message %>
+<% end %>

@@ -1,10 +1,13 @@
-<article class="message is-<%= defined?(type) ? type : "info" %>
-         <%= defined?(size) ? "is-#{size}" : '' %>">
 
-  <% if (defined?(headers) ? headers : true) %>
+<% flash_type = flash_type == "alert" ? "danger" : "info" %>
+
+<article class="message<%= " is-#{flash_type}" %><%= defined?(size) ? " is-#{size}" : '' %>"
+         data-controller="remove" data-remove-target="remove">
+
+  <% if (defined?(headers) ? headers : '') %>
     <div class="message-header">
-      <p><%= defined?(title) ? title : 'message' %></p>
-      <button class="delete" aria-label="delete"></button>
+      <p><%= defined?(title) ? title : flash_type %></p>
+      <button class="delete" aria-label="delete" data-action="removal#remove"></button>
     </div>
   <% end %>
 

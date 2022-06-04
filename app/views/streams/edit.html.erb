@@ -32,12 +32,7 @@
     </div>
     <div class="column is-3">
       <div class="box">
-        <% if alert %>
-          <%= render 'shared/notification', type: :danger, body: alert %>
-        <% end %>
-        <% if notice %>
-          <%= render 'shared/notification', type: :success, body: notice %>
-        <% end %>
+        <%= render "shared/flash_notification" %>
 
         <div class="block">
           <%= render "form", stream: @stream %>
