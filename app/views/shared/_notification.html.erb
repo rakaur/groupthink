@@ -1,4 +1,6 @@
-<div class="notification is-<%= defined?(type) ? type : "info" %>">
-  <button class="delete"></button>
-  <%= defined?(body) ? body : '' %>
+<% flash_type = flash_type == "alert" ? " is-danger" : " is-info" %>
+
+<div class="notification<%= flash_type %>" data-controller="remove" data-remove-target="remove">
+  <button class="delete" data-action="remove#remove"></button>
+  <p class="has-text-centered"><%= defined?(body) ? body : '' %></p>
 </div>

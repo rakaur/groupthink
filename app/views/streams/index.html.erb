@@ -32,26 +32,23 @@
     </div>
 
     <% @streams.limit(2).find_each do |stream| %>
-    <div class="column">
-      <%= render stream %>
-    </div>
+      <div class="column">
+        <%= render stream %>
+      </div>
     <% end %>
 
-    <div class="column box is-2">
+    <div class="column is-2">
       <div class="box">
-        <p class="is-size-4 has-text-centered">extra column!</p>
-        <p class="has-text-centered">
-          Interactive Column, display settings maybe? Detail pane?
-        </p>
-      </div>
+        <%= render "shared/flash_notification" %>
 
-      <% if alert %>
-        <%= render 'shared/notification', type: :danger, body: alert %>
-      <% end %>
-      <% if notice %>
-        <%= render 'shared/notification', type: :info, body: notice %>
-      <% end %>
+        <div class="block">
+          <p class="is-size-4 has-text-centered">extra column!</p>
+          <p class="has-text-centered">
+            Interactive Column, display settings maybe? Detail pane?
+          </p>
+        </div>
 
+      </div> <!-- class="box" -->
     </div> <!-- class="column" -->
   </div> <!-- class="columns" -->
 </section>
