@@ -1,1 +1,21 @@
-<p>Hello from created!</p> 
+<div class="dropdown-item">
+  <div class="field">
+    <%= f.label :created, "created at", class: "label" %>
+    <%= f.text_field :created, type: "date", value: Date.current, class: "input" %>
+    <p class="control has-icons-left">
+      <p class="help is-info">
+        help text
+      </p>
+    </p>
+  </div>
+</div>
+<hr class="dropdown-divider">
+<div class="dropdown-item">
+  <p class="has-text-weight-bold is-italic is-size-6">created &lt;datetime&gt;</p>
+</div>
+<hr class="dropdown-divider">
+<div class="dropdown-item">
+  <p class="help is-size-6">
+    this is a filter!this is a filter! this is a filter! this is a filter!this is a filter! this is a filter!this is a filter! this is a filter!this is a filter! this is a filter!
+  </p>
+</div>

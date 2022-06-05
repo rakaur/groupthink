@@ -7,8 +7,9 @@ class Stream < ApplicationRecord
   # Make sure our users exist
   validates_associated :users
 
-  # `limit` must be a number
-  validates :limit, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
+  # `limit` must be a number, set to nil if 0
+  validates :limit, numericality: { greater_than_or_equal_to: 1, allow_nil: true }
+  before_validation -> { self.limit = nil if limit&.zero? }
 
   # `created` cannot be present alongside `created_ago` or `created_range`
   validates :created_ago, :created_range, absence: true, if: -> { created.present? }
@@ -181,7 +182,7 @@ class Stream < ApplicationRecord
 
     log_title "complete"
 
-    my_limit.nil? || my_limit.zero? ? thoughts : thoughts.limit(my_limit)
+    my_limit ? thoughts.limit(my_limit) : thoughts
   end
 
   # Returns a list the model's attributes used for filtering

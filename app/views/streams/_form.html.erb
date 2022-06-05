@@ -19,12 +19,17 @@
     <% @stream.all_filter_attributes.append(:limit).sort.each do |attr| %>
       <% v = @stream.send(attr) %>
       <label class="panel-block" id="<%= "#{attr}_filter" %>">
-        <div class="dropdown is-hoverable">
+        <div class="dropdown" data-controller="dropdown" data-dropdown-active-class="is-active" id="<%= "#{attr}_dropdown" %>">
           <div class="dropdown-trigger">
-            <div class="button<%= v ? " is-active" : '' %>" aria-haspopup="true" aria-controls="dropdown-menu3">
-              <span><%= attr.to_s.humanize.downcase %></span>
+            <div class="control has-icons-right">
+              <div class="button<%= v ? " is-active" : '' %>" data-action="click->dropdown#toggleActive"
+                   aria-haspopup="true" aria-controls="dropdown-menu3">
+                <span class="icon is-right has-text-black">
+                  <i class="fas fa-angle-down"></i>
+                </span>
+                <span><%= attr.to_s.humanize.downcase %></span>
+              </div>
             </div>
-
           </div>
           <div class="dropdown-menu" id="dropdown-menu2" role="menu">
             <div class="dropdown-content">
