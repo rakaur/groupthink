@@ -5,18 +5,20 @@
     <% end %>
   <% end %>
 
-  <nav class="panel is-primary">
+  <nav class="panel is-primary" data-controller="panel">
     <p class="panel-heading">
       stream #<%= stream.id %> filters
     </p>
 
     <% @stream.all_filter_attributes.append(:limit).sort.each do |attr| %>
       <% v = @stream.send(attr) %>
-      <label class="panel-block" id="<%= "#{attr}_filter" %>">
-        <div class="dropdown">
+      <label class="panel-block" id="<%= "#{attr}_filter" %>" data-controller="filter">
+        <div class="dropdown" data-filter-target="dropdown">
           <div class="dropdown-trigger">
             <div class="control has-icons-right">
               <div class="button<%= v ? " is-active" : '' %>"
+                   data-filter-target="button"
+                   data-action="click->filter#toggleDropdown"
                    aria-haspopup="true" aria-controls="dropdown-menu3">
                 <span class="icon is-right has-text-black">
                   <i class="fas fa-angle-down"></i>
@@ -35,8 +37,8 @@
     <% end %>
 
     <div class="panel-block">
-      <button class="button is-link is-outlined is-fullwidth">
-        reset all filters
+      <button class="button is-link is-outlined is-fullwidth" type="reset" data-action="panel#resetFilters">
+        <span>reset all filters</span>
       </button>
     </div>
     <div class="panel-block">

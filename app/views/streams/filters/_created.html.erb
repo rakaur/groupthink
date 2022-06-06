@@ -1,19 +1,30 @@
 <div class="dropdown-item">
   <div class="field">
     <%= f.label :created, "created at", class: "label" %>
-    <p class="control has-icons-right">
+    <p class="control has-icons-left has-icons-right">
       <%=
         f.text_field :created,
                      type: "date",
+                     autofocus: false,
+                     placeholder: "date created",
+                     class: "input",
                      value: stream.created&.to_date,
-                     class: "input"
+                     data: {
+                       "filter-target" => "input",
+                       "panel-target"  => "input",
+                       "action"        => "filter#inputChanged"
+                     }
       %>
+      <span class="icon is-small is-left">
+        <i class="fas fa-calendar"></i>
+      </span>
       <span class="icon is-small is-right">
-        <button class="delete is-small"></button>
+        <button class="delete is-small" data-action="click->filter#clearInput"></button>
       </span>
       <p class="help is-info">
-        press the <i class="delete is-tiny"></i>
-        to clear this filter
+        press delete, backspace, or press the
+        <i class="delete is-tiny" data-action="click->filter#clearInput"></i>
+        to remove this filter
       </p>
     </p>
   </div>
