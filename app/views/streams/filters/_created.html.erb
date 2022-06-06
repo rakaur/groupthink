@@ -6,18 +6,14 @@
         f.text_field :created,
                      type: "date",
                      value: stream.created&.to_date,
-                     class: "input",
-                     data: {
-                       action: "change->filter#inputChanged",
-                       "filter-target": "clear"
-                     }
+                     class: "input"
       %>
       <span class="icon is-small is-right">
-        <button class="delete is-small" data-action="filter#clear filter#inputChanged"></button>
+        <button class="delete is-small"></button>
       </span>
       <p class="help is-info">
-        press the <i class="delete is-tiny" data-action="click->filter#clear click->filter#inputChanged"></i> to
-        clear this filter
+        press the <i class="delete is-tiny"></i>
+        to clear this filter
       </p>
     </p>
   </div>

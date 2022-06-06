@@ -5,7 +5,7 @@
     <% end %>
   <% end %>
 
-  <nav class="panel is-primary" data-controller="filter">
+  <nav class="panel is-primary">
     <p class="panel-heading">
       stream #<%= stream.id %> filters
     </p>
@@ -13,13 +13,10 @@
     <% @stream.all_filter_attributes.append(:limit).sort.each do |attr| %>
       <% v = @stream.send(attr) %>
       <label class="panel-block" id="<%= "#{attr}_filter" %>">
-        <div class="dropdown" data-controller="dropdown" data-dropdown-active-class="is-active" id="<%= "#{attr}_dropdown" %>">
+        <div class="dropdown">
           <div class="dropdown-trigger">
             <div class="control has-icons-right">
               <div class="button<%= v ? " is-active" : '' %>"
-                   id="<%= "#{attr}_button" %>""
-                   data-action="click->dropdown#toggleActive"
-                   data-filter-target="panelActive"
                    aria-haspopup="true" aria-controls="dropdown-menu3">
                 <span class="icon is-right has-text-black">
                   <i class="fas fa-angle-down"></i>
@@ -28,7 +25,7 @@
               </div>
             </div>
           </div>
-          <div class="dropdown-menu" id="dropdown-menu2" role="menu">
+          <div class="dropdown-menu" role="menu">
             <div class="dropdown-content">
               <%= render "streams/filters/#{attr}", stream: stream, f: f %>
             </div>
@@ -38,7 +35,7 @@
     <% end %>
 
     <div class="panel-block">
-      <button class="button is-link is-outlined is-fullwidth" data-action="filter#clearAll filter#inputChangedAll">
+      <button class="button is-link is-outlined is-fullwidth">
         reset all filters
       </button>
     </div>

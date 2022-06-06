@@ -15,7 +15,7 @@ class StreamsController < ApplicationController
     # chain into the partials
     @thoughts = {}
     @streams.each do |stream|
-      @thoughts[stream.hash] = stream.thoughts(10).includes(:user).references(:user).load
+      @thoughts[stream.hash] = stream.thoughts(10).includes(:user).load
     end
   end
 
@@ -90,7 +90,7 @@ class StreamsController < ApplicationController
     # Preload Thoughts to avoid additional queries
     # TODO remove limit and paginate
     def set_thoughts
-      @thoughts = @stream.thoughts(10).includes(:user).references(:user).load
+      @thoughts = @stream.thoughts(10).includes(:user).load
     end
 
     # Only allow a list of trusted parameters through.
