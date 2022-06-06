@@ -1,17 +1,11 @@
 <%= form_with(model: stream) do |f| %>
   <% if stream.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(stream.errors.count, "error") %> prohibited this stream from being saved:</h2>
-
-      <ul>
-        <% stream.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
+    <% stream.errors.each do |error| %>
+      <%= render "shared/notification", flash_type: "alert", body: error.full_message.downcase %>
+    <% end %>
   <% end %>
 
-  <nav class="panel is-primary" id="<%= dom_id stream %>">
+  <nav class="panel is-primary" data-controller="filter">
     <p class="panel-heading">
       stream #<%= stream.id %> filters
     </p>
@@ -22,7 +16,10 @@
         <div class="dropdown" data-controller="dropdown" data-dropdown-active-class="is-active" id="<%= "#{attr}_dropdown" %>">
           <div class="dropdown-trigger">
             <div class="control has-icons-right">
-              <div class="button<%= v ? " is-active" : '' %>" data-action="click->dropdown#toggleActive"
+              <div class="button<%= v ? " is-active" : '' %>"
+                   id="<%= "#{attr}_button" %>""
+                   data-action="click->dropdown#toggleActive"
+                   data-filter-target="panelActive"
                    aria-haspopup="true" aria-controls="dropdown-menu3">
                 <span class="icon is-right has-text-black">
                   <i class="fas fa-angle-down"></i>
@@ -41,7 +38,7 @@
     <% end %>
 
     <div class="panel-block">
-      <button class="button is-link is-outlined is-fullwidth">
+      <button class="button is-link is-outlined is-fullwidth" data-action="filter#clearAll filter#inputChangedAll">
         reset all filters
       </button>
     </div>

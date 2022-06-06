@@ -1,10 +1,23 @@
 <div class="dropdown-item">
   <div class="field">
     <%= f.label :created, "created at", class: "label" %>
-    <%= f.text_field :created, type: "date", value: Date.current, class: "input" %>
-    <p class="control has-icons-left">
+    <p class="control has-icons-right">
+      <%=
+        f.text_field :created,
+                     type: "date",
+                     value: stream.created&.to_date,
+                     class: "input",
+                     data: {
+                       action: "change->filter#inputChanged",
+                       "filter-target": "clear"
+                     }
+      %>
+      <span class="icon is-small is-right">
+        <button class="delete is-small" data-action="filter#clear filter#inputChanged"></button>
+      </span>
       <p class="help is-info">
-        help text
+        press the <i class="delete is-tiny" data-action="click->filter#clear click->filter#inputChanged"></i> to
+        clear this filter
       </p>
     </p>
   </div>
@@ -16,6 +29,7 @@
 <hr class="dropdown-divider">
 <div class="dropdown-item">
   <p class="help is-size-6">
-    this is a filter!this is a filter! this is a filter! this is a filter!this is a filter! this is a filter!this is a filter! this is a filter!this is a filter! this is a filter!
+    the created filter limits the results to those created on a particular date,
+    regardless of how many were found by other filters
   </p>
 </div>

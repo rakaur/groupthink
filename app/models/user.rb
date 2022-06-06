@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   # TODO :reek:UtilityFunction
   def default_stream
-    Stream.first
+    Stream.find(1)
   end
 
   def to_s

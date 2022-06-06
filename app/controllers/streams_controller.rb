@@ -50,6 +50,7 @@ class StreamsController < ApplicationController
         format.html { redirect_to edit_stream_url(@stream), notice: "stream saved" }
         format.json { render :show, status: :ok, location: @stream }
       else
+        @stream.reload # Not sure why this is necessary but it keeps around the invalid values
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @stream.errors, status: :unprocessable_entity }
       end
