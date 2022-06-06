@@ -27,13 +27,9 @@
 
 <section class="section">
   <div class="columns is-fullheight">
-    <div class="column">
-      <%= render current_user.default_stream, thoughts: current_user.default_stream.thoughts %>
-    </div>
-
-    <% @streams.limit(2).find_each do |stream| %>
+    <% @streams.each do |stream| %>
       <div class="column">
-        <%= render stream, thoughts: stream.thoughts %>
+        <%= render stream, stream: stream, thoughts: @thoughts[stream.hash] %>
       </div>
     <% end %>
 

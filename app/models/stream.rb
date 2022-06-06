@@ -169,7 +169,7 @@ class Stream < ApplicationRecord
     thoughts = Thought.all
 
     log_title "Stream[#{id}]#thoughts"
-    log "** #{from}" if from
+    log "!! #{from}" if from
 
     time = log_time do
       present_filter_attributes.each do |attr|
@@ -189,6 +189,14 @@ class Stream < ApplicationRecord
         thoughts = thoughts.where(fmt.call(attr, value))
       end
     end
+
+    log "order"
+    log_sub "value: #{{ created_at: :desc }}"
+
+    thoughts = thoughts.order(created_at: :desc)
+
+    log "limit"
+    log_sub "value: #{my_limit.inspect}"
 
     log_title "Stream[#{id}]#thoughts #{time}"
 
