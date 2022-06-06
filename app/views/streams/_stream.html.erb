@@ -16,13 +16,13 @@
       stream #<%= stream.id %>
     </p>
     <p class="has-text-centered">
-      <%= stream.thoughts&.count %> total, 10 shown
+      <%= thoughts.size %> shown
     </p>
   </div>
 
   <hr />
 
-  <% stream.thoughts.order(created_at: :desc).limit(10).each do |thought| %>
+  <% thoughts.each do |thought| %>
     <%= render thought %>
   <% end %>
 </div>

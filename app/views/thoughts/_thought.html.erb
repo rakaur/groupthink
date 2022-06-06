@@ -8,7 +8,7 @@
               <a class="level-item">
                 <small>
                   <strong>
-                    <%= user_signed_in? && current_user == thought.user ? "you" : thought.user.to_s %>
+                    <%= @user == thought.user ? "you" : thought.user.to_s %>
                   </strong>
                 </small>
               </a>

@@ -1,10 +1,22 @@
 class StreamsController < ApplicationController
   before_action :set_stream, only: %i[ show edit update destroy ]
+  before_action :set_thoughts, only: %i[ edit update ]
 
   # GET /streams or /streams.json
   def index
-    @streams = current_user.streams if user_signed_in?
-    @streams ||= Stream.where(id: Stream.first.id)
+    # Load the default Stream followed by Streams the current user owns
+    @streams = Stream.where(id: 1)
+    @streams = @streams.or(Stream.where(id: current_user.streams.limit(2))) if user_signed_in?
+    @streams = @streams.limit(3).order(id: :asc)
+
+    # Since the `Stream#thoughts` method only looks like a real association
+    # but really isn't and has no caching, we pre-load all of the Users from
+    # all of the Thoughts from all of the Streams and pass it down the render
+    # chain into the partials
+    @thoughts = {}
+    @streams.each do |stream|
+      @thoughts[stream.hash] = stream.thoughts(10).includes(:user).load
+    end
   end
 
   # GET /streams/1 or /streams/1.json
@@ -50,6 +62,7 @@ class StreamsController < ApplicationController
         format.html { redirect_to edit_stream_url(@stream), notice: "stream saved" }
         format.json { render :show, status: :ok, location: @stream }
       else
+        @stream.reload # Not sure why this is necessary but it keeps around the invalid values
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @stream.errors, status: :unprocessable_entity }
       end
@@ -72,6 +85,12 @@ class StreamsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_stream
       @stream = Stream.find(params[:id])
+    end
+
+    # Preload Thoughts to avoid additional queries
+    # TODO remove limit and paginate
+    def set_thoughts
+      @thoughts = @stream.thoughts(10).includes(:user).load
     end
 
     # Only allow a list of trusted parameters through.

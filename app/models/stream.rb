@@ -1,14 +1,17 @@
 # TODO :reek:SimulatedPolymorphism and :reek:TooManyStatements
 class Stream < ApplicationRecord
-  LOGFILE = Rails.root.join("log/stream_thoughts.log")
+  LOG_FILE = Rails.root.join("log/stream_thoughts.log")
+  LOG_DTF  = "%Y-%m-%d %H:%M:%S"
+  LOG_FMT  = ->(l, d, _, m) { "[#{d.strftime(LOG_DTF)}] [#{l.downcase}] #{m}\n" }
 
   has_and_belongs_to_many :users
 
   # Make sure our users exist
   validates_associated :users
 
-  # `limit` must be a number
-  validates :limit, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
+  # `limit` must be a number, set to nil if 0
+  validates :limit, numericality: { greater_than: 0, allow_nil: true }
+  before_validation -> { self.limit = nil if limit&.zero? }
 
   # `created` cannot be present alongside `created_ago` or `created_range`
   validates :created_ago, :created_range, absence: true, if: -> { created.present? }
@@ -94,7 +97,7 @@ class Stream < ApplicationRecord
       ->(attr, value) { { user: value } },
 
     %i[ created updated ] =>
-      ->(attr, value) { { "#{attr}_at" => value } },
+      ->(attr, value) { { "#{attr}_at" => value.beginning_of_day .. value.end_of_day } },
 
     %i[ created_ago updated_ago ] =>
       ->(attr, value) { { "#{attr[0, 7]}_at" => value.ago .. Time.current } },
@@ -106,8 +109,9 @@ class Stream < ApplicationRecord
 
   NON_FILTER_ATTRIBUTES = %i[ id created_at limit updated_at ]
 
-  # Returns all Thoughts that match the Stream's filter fields
+  # Finds all the Thoughts matching this Stream's filter fields
   # Accepts an optional limit to override the Stream's own limit (if present)
+  # Returns an unexecuted ActiveRecord::Relation
   #
   # All dates/times are UTC, but displayed in America/Chicago (for now)
   # TODO: localize date/time display to user's timezone
@@ -130,7 +134,7 @@ class Stream < ApplicationRecord
   #   use pg_search to search the contents of Thoughts
   #
   # created, datetime -> ActiveSupport::TimeWithZone
-  #   select: Thoughts with the exact created_at
+  #   select: Thoughts created any time on the specified day
   #     note: validation error if present alongside `created_ago` or `created_range`
   #
   # created_ago, interval -> ActiveSupport::Duration
@@ -146,7 +150,7 @@ class Stream < ApplicationRecord
   #   select: the number of Thoughts specified as the maximum
   #
   # updated, datetime -> ActiveSupport::TimeWithZone
-  #   select: Thoughts with the exact updated_at
+  #   select: Thoughts updated any time on the specified day
   #     note: validation error if present alongside `updated_ago` or `updated_range`
   #
   # updated_ago, interval -> ActiveSupport::Duration
@@ -159,29 +163,39 @@ class Stream < ApplicationRecord
   #     note: validation error if present alongside `updated`
   #
   def thoughts(my_limit = nil)
+    from = caller&.first[/^.+\/(.+\/.+:\d+):.+$/i, 1]
+
     my_limit ||= limit
     thoughts = Thought.all
 
-    log_title "#thoughts"
+    log_title "Stream[#{id}]#thoughts"
+    log "!! #{from}" if from
 
-    log_time "processing filter" do
+    time = log_time do
       present_filter_attributes.each do |attr|
+        log attr
+
         value = send(attr)
 
-        log_sub "#{attr}: #{value}"
+        log_sub "value: #{value}"
 
         key = QUERY_MAP.keys.find { |key| attr == key || attr.in?(key) }
         fmt = QUERY_MAP.fetch(key, QUERY_MAP.default)
+        qry = fmt.call(attr, value)
+
+        log_sub "query:"
+        qry.pretty_inspect.split("\n").each { |l| log_sub_sub l }
 
         thoughts = thoughts.where(fmt.call(attr, value))
       end
-
-      thoughts.count
     end
 
-    log_title "complete"
+    log "limit"
+    log_sub "value: #{my_limit.inspect}"
 
-    my_limit.nil? || my_limit.zero? ? thoughts : thoughts.limit(my_limit)
+    log_title "Stream[#{id}]#thoughts #{time}"
+
+    my_limit ? thoughts.limit(my_limit) : thoughts
   end
 
   # Returns a list the model's attributes used for filtering
@@ -201,19 +215,14 @@ class Stream < ApplicationRecord
     end
 
     def logger
-      @logger ||= Logger.new(LOGFILE)
-
-      @logger.formatter = proc do |severity, datetime, progname, msg|
-        "[#{datetime.strftime("%Y-%m-%d %H:%M:%S")}] [#{severity.downcase}] #{msg}\n"
-      end
-
+      @logger ||= Logger.new(LOG_FILE)
+      @logger.formatter = LOG_FMT
       @logger
     end
 
-    def log_title(message)
-      text = "#{id} Stream: #{message}"
-      length = [0, 45 - text.length].max
-      logger.debug "== %s %s" % [text, "=" * length]
+    def log_title(message = "")
+      length = [0, 45 - message.length].max
+      logger.debug "== #{message} #{'=' * length}"
     end
 
     def log(message)
@@ -224,15 +233,26 @@ class Stream < ApplicationRecord
       logger.debug "   -> #{message}"
     end
 
-    def log_time(message)
-      log message
+    def log_sub_sub(message)
+      text = "        #{message}"
+      text = "#{text[0 ... 42]}..." if text.length > 45
+      logger.debug text
+    end
+
+    def log_time(message = nil)
+      log message if message
 
       result = nil
       time = Benchmark.measure { result = yield }
 
-      log "%.4fs" % time.real
-      log("#{result} rows") if result.is_a?(Integer)
+      time_string = "%.4fs" % time.real
+      rows_string = "#{result} rows" if result.is_a?(Integer)
 
-      result
+      if message
+        log_sub time_string
+        log_sub rows_string if rows_string
+      end
+
+      time_string
     end
 end

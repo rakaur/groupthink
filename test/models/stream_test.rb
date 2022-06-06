@@ -129,10 +129,10 @@ class StreamTest < ActiveSupport::TestCase
     expected.count.times { |i| assert_equal expected[i], actual[i] }
   end
 
-  test "#thoughts does no limit" do
-    @stream = streams(:no_limit)
-    expected = Thought.where(created_at: @stream.created_ago.ago .. Time.current)
-    actual = @stream.thoughts
+  test "#thoughts does param limit" do
+    @stream = streams(:one)
+    expected = Thought.where(created_at: @stream.created_ago.ago .. Time.current).limit(5)
+    actual = @stream.thoughts(5)
 
     assert_equal expected.count, actual.count
 

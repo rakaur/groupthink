@@ -1,7 +1,7 @@
 <div class="dropdown-item">
   <div class="field">
     <%= f.label :limit, "limit", class: "label" %>
-    <p class="control has-icons-left">
+    <p class="control has-icons-left has-icons-right">
       <%=
         f.number_field :limit,
                        autofocus: false,
@@ -11,6 +11,9 @@
       %>
       <span class="icon is-small is-left">
         <i class="fas fa-hand"></i>
+      </span>
+      <span class="icon is-small is-right">
+        <button class="delete is-small"></button>
       </span>
       <p class="help is-info">
         setting the limit to zero (0) will disable it
