@@ -190,11 +190,6 @@ class Stream < ApplicationRecord
       end
     end
 
-    log "order"
-    log_sub "value: #{{ created_at: :desc }}"
-
-    thoughts = thoughts.order(created_at: :desc)
-
     log "limit"
     log_sub "value: #{my_limit.inspect}"
 

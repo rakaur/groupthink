@@ -20,7 +20,7 @@ class ThoughtsControllerTest < ActionDispatch::IntegrationTest
       post thoughts_url, params: { thought: { content: @thought.content, user_id: @thought.user_id } }
     end
 
-    assert_redirected_to thought_url(Thought.last)
+    assert_redirected_to thought_url(Thought.first)
   end
 
   test "shouldn't create thought" do

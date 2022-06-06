@@ -1,6 +1,6 @@
 class StreamsController < ApplicationController
   before_action :set_stream, only: %i[ show edit update destroy ]
-  before_action :set_thoughts, only: %i[ edit ]
+  before_action :set_thoughts, only: %i[ edit update ]
 
   # GET /streams or /streams.json
   def index
