@@ -245,14 +245,6 @@ class Stream < ApplicationRecord
       result = nil
       time = Benchmark.measure { result = yield }
 
-      time_string = "%.4fs" % time.real
-      rows_string = "#{result} rows" if result.is_a?(Integer)
-
-      if message
-        log_sub time_string
-        log_sub rows_string if rows_string
-      end
-
-      time_string
+      "%.4fs" % time.real
     end
 end
