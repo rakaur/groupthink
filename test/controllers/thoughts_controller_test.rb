@@ -20,7 +20,9 @@ class ThoughtsControllerTest < ActionDispatch::IntegrationTest
       post thoughts_url, params: { thought: { content: @thought.content, user_id: @thought.user_id } }
     end
 
-    assert_redirected_to thought_url(Thought.first)
+    actual = thought_url(Thought.find_by(content: @thought.content, user_id: @thought.user_id))
+
+    assert_redirected_to actual
   end
 
   test "shouldn't create thought" do
