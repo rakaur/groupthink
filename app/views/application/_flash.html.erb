@@ -1,0 +1,6 @@
+<% flash.each do |flash_type, message| %>
+  <%=
+    template = flash_type == "alert" ? "alert" : "notification"
+    render template, body: message
+  %>
+<% end %>

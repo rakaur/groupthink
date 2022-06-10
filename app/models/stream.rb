@@ -183,8 +183,8 @@ class Stream < ApplicationRecord
         fmt = QUERY_MAP.fetch(key, QUERY_MAP.default)
         qry = fmt.call(attr, value)
 
-        log_sub "query:"
-        qry.pretty_inspect.split("\n").each { |l| log_sub_sub l }
+        # log_sub "query:"
+        # qry.pretty_inspect.split("\n").each { |l| log_sub_sub l }
 
         thoughts = thoughts.where(fmt.call(attr, value))
       end

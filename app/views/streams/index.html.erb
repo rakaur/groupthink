@@ -1,50 +1,5 @@
-<section class="hero is-primary is-small">
-  <div class="hero-head">
-    <%= render "shared/navbar" %>
+<% @streams.each do |stream| %>
+  <div>
+    <%#= render stream, stream: stream, thoughts: @thoughts[stream.hash] %>
   </div>
-
-  <div class="hero-body">
-  </div>
-  <div class="hero-foot">
-    <div class="tabs is-centered is-boxed">
-      <ul>
-        <li class="is-active">
-          <a href="<%= streams_path %>">
-            <span class="icon is-small"><i class="fas fa-list" aria-hidden="true"></i></span>
-            <span>Streams</span>
-          </a>
-        </li>
-        <li>
-          <a>
-            <span class="icon is-small"><i class="fas fa-gear" aria-hidden="true"></i></span>
-            <span>Settings</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="columns is-fullheight">
-    <% @streams.each do |stream| %>
-      <div class="column">
-        <%= render stream, stream: stream, thoughts: @thoughts[stream.hash] %>
-      </div>
-    <% end %>
-
-    <div class="column is-2">
-      <div class="box">
-        <%= render "shared/flash_notification" %>
-
-        <div class="block">
-          <p class="is-size-4 has-text-centered">extra column!</p>
-          <p class="has-text-centered">
-            Interactive Column, display settings maybe? Detail pane?
-          </p>
-        </div>
-
-      </div> <!-- class="box" -->
-    </div> <!-- class="column" -->
-  </div> <!-- class="columns" -->
-</section>
+<% end %>

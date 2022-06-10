@@ -1,22 +1,31 @@
-    <%= render "shared/header" %>
-    <%= render "shared/navbar" %>
+<%= render "header" %>
 
-    <section class="hero is-primary is-fullheight-with-navbar">
-      <div class="hero-body">
-        <div class="container">
-          <div class="columns is-centered">
-            <div class="column is-5-tablet is-4-widescreen">
-              <div class="box" style="padding: 1.5rem 10% 1.5rem 10%">
-                <%= yield %>
-                <%= render "devise/shared/links" %>
-              </div> <!-- class="box" -->
-            </div> <!-- class="column" -->
-          </div> <!-- class="columns" -->
-        </div> <!-- class="container" -->
-      </div> <!-- class="hero-body" -->
-    </section>
+<main class="
+  flex flex-col
+  items-center justify-center
+  w-full h-full
+  bg-gradient-to-r from-one via-two to-three
+  ">
 
-    <%= render "shared/footer" %>
+  <section class="
+    flex flex-col
+    items-center justify-center
+    bg-white shadow-2xl rounded-lg
+    mt-6 space-y-4
+    min-h-max
+    ">
 
-  </body>
-</html>
+    <article class="
+      flex flex-col
+      items-center justify-center
+      ph:p-6 ph:mx-3 tabp:p-12 tabp:mx-6 w-full
+      ">
+
+      <%= yield %>
+      <%= render "devise/shared/links" %>
+
+    </article>
+  </section>
+</main>
+
+<%= render "footer" %>

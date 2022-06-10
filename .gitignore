@@ -18,8 +18,9 @@
 !/tmp/pids/
 !/tmp/pids/.keep
 
-
 /public/assets
+/app/assets/builds/*
+!/app/assets/builds/.keep
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
@@ -29,4 +30,3 @@
 
 # Ignore unit test coverage report
 /coverage
-
