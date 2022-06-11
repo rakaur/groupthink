@@ -4,9 +4,11 @@ class Group < ApplicationRecord
   LOG_DTF  = "%Y-%m-%d %H:%M:%S"
   LOG_FMT  = ->(l, d, _, m) { "[#{d.strftime(LOG_DTF)}] [#{l.downcase}] #{m}\n" }
 
+  has_and_belongs_to_many :filters
   has_and_belongs_to_many :users
 
-  # Make sure our users exist
+  # Make sure our associations exist
+  validates_associated :filters
   validates_associated :users
 
   # `limit` must be a number, set to nil if 0

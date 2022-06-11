@@ -2,73 +2,58 @@
 
 # Accurate representation of the "default group"
 # Show all Thoughts created within the last month
+# Actual filter params are in filters.yml
 one:
   id: 1
-  created_ago: <%= 1.month %>
+  filters: default
 
 # Used by admin and 20 random others
 # Show all Thoughts ever created by admin
 two:
   id: 2
   users: admin, <%= (0 ... 100).to_a.map { |i| "user_#{i}" }.sample(20).join(", ") %>
-  author_ids: [<%= ActiveRecord::FixtureSet.identify(:admin) %>]
 
 # Used by admin a 20 random others
 # Show all Thoughts created by a random user within the last year
 three:
   id: 3
   users: admin, <%= (0 ... 100).to_a.map { |i| "user_#{i}" }.sample(20).join(", ") %>
-  author_ids: [<%= ActiveRecord::FixtureSet.identify((0 ... 100).to_a.map { |i| :"user_#{i}" }.sample) %>]
-  created_ago: <%= 1.year %>
 
 all_tags:
   users: admin
-  all_tags: []
+  filters: all_tags
 
 any_tags:
   users: admin
-  any_tags: []
+  filters: any_tags
 
 author_id:
   users: admin
-  author_ids: [<%= ActiveRecord::FixtureSet.identify((0 ... 100).to_a.map { |i| :"user_#{i}" }.sample) %>]
 
 author_ids:
   users: admin
-  author_ids: [<%= ActiveRecord::FixtureSet.identify(:admin) %>, <%= ActiveRecord::FixtureSet.identify((0 ... 100).to_a.map { |i| :"user_#{i}" }.sample) %>]
 
 content:
   users: admin
+  filters: content
 
 created:
   users: admin
-  created: <%= Time.parse("08:52 6 Sep 2016") %>
+  filters: created
 
 created_ago:
   users: admin
-  created_ago: <%= 1.year %>
+  filters: created_ago
 
 created_range:
   users: admin
-  created_range: "[2016-09-06, <%= Date.current.to_s %>]"
-
-limit:
-  users: admin
-  limit: 5
+  filters: created_range
 
 updated:
   users: admin
-  updated: <%= Time.parse("08:52 6 Sep 2016") %>
 
 updated_ago:
   users: admin
-  updated_ago: <%= 1.year %>
 
 updated_range:
   users: admin
-  updated_range: "[2016-09-06, <%= Date.current.to_s %>]"
-
-multiple:
-  users: admin
-  author_ids: [<%= ActiveRecord::FixtureSet.identify(:admin) %>]
-  updated_range: "[<%= 9.months.ago.strftime("%Y-%m-%d") %>, <%= 1.week.ago.strftime("%Y-%m-%d") %>]"

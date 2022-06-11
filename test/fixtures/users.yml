@@ -5,6 +5,16 @@ admin:
   email: admin@groupthink.me
   encrypted_password: <%= Devise::Encryptor.digest(User, "admin-password") %>
 
+one:
+  id: 1
+  email: one@groupthink.me
+  encrypted_password: <%= Devise::Encryptor.digest(User, "one-password") %>
+
+two:
+  id: 2
+  email: two@groupthink.me
+  encrypted_password: <%= Devise::Encryptor.digest(User, "two-password") %>
+
 <% 100.times do |i| %>
 user_<%= i %>:
   email: <%= "#{Faker::Movies::StarWars.character.downcase.gsub(/\s/, '_')}_#{rand(1000..9999)}@#{Faker::Movies::StarWars.specie.downcase.gsub(/\s/, '_')}.#{Faker::Movies::StarWars.planet.downcase.gsub(/\s/, '_')}.#{Faker::Internet.domain_suffix}" %>

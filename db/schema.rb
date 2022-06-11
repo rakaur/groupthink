@@ -10,22 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_11_142011) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_11_160344) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "filters", force: :cascade do |t|
+    t.string "attribute"
+    t.string "comparison_type"
+    t.string "comparison_operator"
+    t.string "compare_string"
+    t.date "compare_date"
+    t.time "compare_time"
+    t.datetime "compare_datetime"
+    t.daterange "compare_daterange"
+    t.interval "compare_interval"
+    t.string "compare_string_array"
+    t.bigint "compare_number"
+    t.bigint "compare_number_array"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "filters_groups", id: false, force: :cascade do |t|
+    t.bigint "filter_id", null: false
+    t.bigint "group_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["filter_id"], name: "index_filters_groups_on_filter_id"
+    t.index ["group_id"], name: "index_filters_groups_on_group_id"
+  end
+
   create_table "groups", force: :cascade do |t|
-    t.string "all_tags", array: true
-    t.string "any_tags", array: true
-    t.bigint "author_ids", array: true
-    t.string "content"
-    t.datetime "created"
-    t.interval "created_ago"
-    t.daterange "created_range"
-    t.integer "limit"
-    t.datetime "updated"
-    t.interval "updated_ago"
-    t.daterange "updated_range"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
