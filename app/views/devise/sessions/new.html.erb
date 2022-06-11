@@ -31,6 +31,13 @@
     <% end %>
   </div>
 
+  <div class="flex items-center justify-center gap-2 text-center text-violet-500 mb-4">
+    <%= f.check_box :remember_me, title: "remember me" %>
+    <%= f.label :remember_me, title: "remember me" do %>
+      <i class="fas fa-bookmark" title="remember me"></i>
+    <% end %>
+  </div>
+
   <div class="text-center pt-1 mb-6 dt:mb-12">
     <button class="gt-btn" type="submit" form="new_user"
       data-mdb-ripple="true"

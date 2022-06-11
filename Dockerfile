@@ -3,7 +3,7 @@ FROM ruby:3.1.0-alpine AS build
 RUN apk update && \
     apk upgrade && \
     apk add build-base tzdata postgresql-dev
-WORKDIR /streams
+WORKDIR /app
 COPY Gemfile* .
 RUN bundle install --jobs=4
 
@@ -12,7 +12,7 @@ RUN apk update && \
     apk upgrade && \
     apk add bash tzdata postgresql-client yarn && \
     rm -rf /var/cache/apk/*
-WORKDIR /streams
+WORKDIR /app
 COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY . .
 
