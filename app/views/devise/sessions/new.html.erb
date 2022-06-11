@@ -2,12 +2,9 @@
   <%= image_tag "logo-square.png", class: "w-48 mx-auto ph:mb-6 tabp:mb-12" %>
 </div>
 
-<%= render "flash" %>
-
 <%= form_for resource,
              as: resource_name,
-             url: session_path(resource_name),
-             html: data_turbo_false do |f|
+             url: session_path(resource_name) do |f|
   %>
 
   <div class="form-floating mb-4">
