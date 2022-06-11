@@ -37,6 +37,8 @@ jobs:
       # Add or replace database setup steps here
       - name: Set up database
         run: bin/rails db:prepare
+      - name: Prepare assets
+        run: bin/rails tailwindcss:build
       # Add or replace test runners here
       - name: Run tests
         run: bin/rails test
