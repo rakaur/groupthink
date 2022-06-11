@@ -1,40 +1,41 @@
-<%= form_with(model: stream) do |f| %>
-  <% if stream.errors.any? %>
-    <% stream.errors.each do |error| %>
-      <%= render "shared/notification", flash_type: "alert", body: error.full_message.downcase %>
-    <% end %>
-  <% end %>
+<!--
+<%#= form_with(model: stream) do |f| %>
+  <%# if stream.errors.any? %>
+    <%# stream.errors.each do |error| %>
+      <%#= render "shared/notification", flash_type: "alert", body: error.full_message.downcase %>
+    <%# end %>
+  <%# end %>
 
   <nav class="panel is-primary" data-controller="panel">
     <p class="panel-heading">
-      stream #<%= stream.id %> filters
+      stream #<%#= stream.id %> filters
     </p>
 
-    <% @stream.all_filter_attributes.append(:limit).sort.each do |attr| %>
-      <% v = @stream.send(attr) %>
-      <label class="panel-block" id="<%= "#{attr}_filter" %>" data-controller="filter">
+    <%# @stream.all_filter_attributes.append(:limit).sort.each do |attr| %>
+      <%# v = @stream.send(attr) %>
+      <label class="panel-block" id="<%#= "#{attr}_filter" %>" data-controller="filter">
         <div class="dropdown" data-filter-target="dropdown">
           <div class="dropdown-trigger">
             <div class="control has-icons-right">
-              <div class="button<%= v ? " is-active" : '' %>"
+              <div class="button<%#= v ? " is-active" : '' %>"
                    data-filter-target="button"
                    data-action="click->filter#toggleDropdown"
                    aria-haspopup="true" aria-controls="dropdown-menu3">
                 <span class="icon is-right has-text-black">
                   <i class="fas fa-angle-down"></i>
                 </span>
-                <span><%= attr.to_s.humanize.downcase %></span>
+                <span><%#= attr.to_s.humanize.downcase %></span>
               </div>
             </div>
           </div>
           <div class="dropdown-menu" role="menu">
             <div class="dropdown-content">
-              <%=# render "streams/filters/#{attr}", stream: stream, f: f %>
+              <%#= render "streams/filters/#{attr}", stream: stream, f: f %>
             </div>
           </div>
         </div>
       </label>
-    <% end %>
+    <%# end %>
 
     <div class="panel-block">
       <button class="button is-link is-outlined is-fullwidth" type="reset" data-action="panel#resetFilters">
@@ -42,7 +43,7 @@
       </button>
     </div>
     <div class="panel-block">
-      <%= f.submit "save", class: "button is-primary is-outlined is-fullwidth" %>
+      <%#= f.submit "save", class: "button is-primary is-outlined is-fullwidth" %>
     </div>
   </nav>
-<% end %>
+<%# end %>
