@@ -1,6 +1,6 @@
 # TODO :reek:SimulatedPolymorphism and :reek:TooManyStatements
-class Stream < ApplicationRecord
-  LOG_FILE = Rails.root.join("log/stream_thoughts.log")
+class Group < ApplicationRecord
+  LOG_FILE = Rails.root.join("log/group_thoughts.log")
   LOG_DTF  = "%Y-%m-%d %H:%M:%S"
   LOG_FMT  = ->(l, d, _, m) { "[#{d.strftime(LOG_DTF)}] [#{l.downcase}] #{m}\n" }
 
@@ -109,8 +109,8 @@ class Stream < ApplicationRecord
 
   NON_FILTER_ATTRIBUTES = %i[ id created_at limit updated_at ]
 
-  # Finds all the Thoughts matching this Stream's filter fields
-  # Accepts an optional limit to override the Stream's own limit (if present)
+  # Finds all the Thoughts matching this Group's filter fields
+  # Accepts an optional limit to override the Group's own limit (if present)
   # Returns an unexecuted ActiveRecord::Relation
   #
   # All dates/times are UTC, but displayed in America/Chicago (for now)
@@ -168,7 +168,7 @@ class Stream < ApplicationRecord
     my_limit ||= limit
     thoughts = Thought.all
 
-    log_title "Stream[#{id}]#thoughts"
+    log_title "group[#{id}]#thoughts"
     log "!! #{from}" if from
 
     time = log_time do
@@ -193,7 +193,7 @@ class Stream < ApplicationRecord
     log "limit"
     log_sub "value: #{my_limit.inspect}"
 
-    log_title "Stream[#{id}]#thoughts #{time}"
+    log_title "Group[#{id}]#thoughts #{time}"
 
     my_limit ? thoughts.limit(my_limit) : thoughts
   end

@@ -17,11 +17,11 @@ admin_thought_<%= i %>:
 <% end %>
 
 created:
-  content: for Stream.thoughts model unit test
+  content: for Group.thoughts model unit test
   user: admin
   created_at: <%= Time.parse("08:52 6 Sep 2016") %>
 
 updated:
-  content: for Stream.thoughts model unit test
+  content: for Group.thoughts model unit test
   user: admin
   updated_at: <%= Time.parse("08:52 6 Sep 2016") %>

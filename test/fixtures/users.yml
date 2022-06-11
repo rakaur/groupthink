@@ -2,7 +2,7 @@
 # a random email address.
 
 admin:
-  email: admin@admin.streams
+  email: admin@groupthink.me
   encrypted_password: <%= Devise::Encryptor.digest(User, "admin-password") %>
 
 <% 100.times do |i| %>

@@ -5,12 +5,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :lockable, :trackable
 
-  has_and_belongs_to_many :streams
+  has_and_belongs_to_many :groups
   has_many :thoughts
 
   # TODO :reek:UtilityFunction
-  def default_stream
-    Stream.find(1)
+  def default_group
+    Group.find(1)
   end
 
   def to_s

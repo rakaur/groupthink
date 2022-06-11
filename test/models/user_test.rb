@@ -1,9 +1,9 @@
 require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
-  test "#default_stream returns Stream # 1" do
-    expected = Stream.find(1)
-    actual = User.all.sample.default_stream
+  test "#default_group returns Group #1" do
+    expected = Group.find(1)
+    actual = User.all.sample.default_group
     assert_equal expected, actual
   end
 end
