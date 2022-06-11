@@ -1,23 +1,24 @@
-
+<p>this action is not currently permitted</p>
+<!--
 <div class="block">
   <p class="is-size-4 has-text-centered">
     edit account details
   </p>
 </div>
 
-<%= render "shared/flash_message" %>
-<%= render "devise/shared/error_messages", resource: resource %>
+<%#= render "shared/flash_message" %>
+<%#= render "devise/shared/error_messages", resource: resource %>
 
-<%=
+<%#=
   form_for resource,
            as: resource_name,
            url: registration_path(resource_name),
            html: { method: :put, data: turbo_false } do |f|
 %>
   <div class="field">
-    <%= f.label :email, "email address", class: "label" %>
+    <%#= f.label :email, "email address", class: "label" %>
     <p class="control has-icons-left">
-      <%=
+      <%#=
         f.email_field :email,
                       autofocus: true,
                       autocomplete: "email",
@@ -30,18 +31,18 @@
     </p>
   </div>
 
-<% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-<div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-<% end %>
+<%# if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+<div>Currently waiting confirmation for: <%#= resource.unconfirmed_email %></div>
+<%# end %>
 
   <article class="message is-danger">
     <div class="message-header"><p>change password</p></div>
     <div class="message-body">
 
       <div class="field">
-        <%= f.label :password, "password", class: "label" %>
+        <%#= f.label :password, "password", class: "label" %>
         <p class="control has-icons-left">
-          <%=
+          <%#=
             f.password_field :password,
                              autocomplete: "new-password",
                              placeholder: "new password",
@@ -54,9 +55,9 @@
       </div>
 
       <div class="field">
-        <%= f.label :password_confirmation, "password confirmation", class: "label" %>
+        <%#= f.label :password_confirmation, "password confirmation", class: "label" %>
         <p class="control has-icons-left">
-          <%=
+          <%#=
             f.password_field :password_confirmation,
                              autocomplete: "new-password",
                              placeholder: "password confirmation",
@@ -71,10 +72,10 @@
   </article>
 
   <div class="field">
-    <%= f.label :current_password, "current password", class: "label" %>
+    <%#= f.label :current_password, "current password", class: "label" %>
 
     <p class="control has-icons-left">
-      <%=
+      <%#=
         f.password_field :current_password,
                          autocomplete: "current-password",
                          placeholder: "confirm current password",
@@ -88,7 +89,8 @@
 
   <div class="field">
     <p class="control">
-      <%= f.submit "update", class: "button is-primary is-fullwidth" %>
+      <%#= f.submit "update", class: "button is-primary is-fullwidth" %>
     </p>
   </div>
-<% end %>
+<%# end %>
+-->

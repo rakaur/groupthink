@@ -1,26 +1,33 @@
 /* Application styles */
-@import "https://unpkg.com/bulmaswatch/pulse/bulmaswatch.min.css";
 
-/* Fix for bulma tags inside a hero */
-.hero-foot > .tabs a {
-  color: #ffffff !important;
-}
-.hero-foot > .tabs > ul > li.is-active a {
-  color: #8e44ad !important;
+.colored-toast.swal2-icon-success {
+  background-color: #a5dc86 !important;
 }
 
-/* Allows an entire panel-block to be a dropdown */
-.panel-block > div.dropdown, div.dropdown > div.dropdown-trigger, div.dropdown-trigger > div.control > div.button {
-  width: 100%;
+.colored-toast.swal2-icon-error {
+  background-color: #f27474 !important;
 }
 
-/* Sometimes is-small just isn't small enough */
-.is-tiny.delete, .is-tiny.modal-close {
-  height: 12px;
-  max-height: 12px;
-  max-width: 12px;
-  min-height: 12px;
-  min-width: 12px;
-  width: 12px;
-  vertical-align: middle;
+.colored-toast.swal2-icon-warning {
+  background-color: #f8bb86 !important;
+}
+
+.colored-toast.swal2-icon-info {
+  background-color: #3fc3ee !important;
+}
+
+.colored-toast.swal2-icon-question {
+  background-color: #87adbd !important;
+}
+
+.colored-toast .swal2-title {
+  color: white;
+}
+
+.colored-toast .swal2-close {
+  color: white;
+}
+
+.colored-toast .swal2-html-container {
+  color: white;
 }

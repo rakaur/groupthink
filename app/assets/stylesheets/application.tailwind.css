@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .gt-btn {
+    @apply inline-block w-full px-6 py-2.5 mb-3 text-white font-medium text-xs leading-tight uppercase tracking-wider rounded shadow-md !bg-gradient-to-r !from-one !via-two !to-three hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg;
+  }
+
+  .gt-ol-btn {
+    @apply inline-block px-6 py-2.5 border-2 border-violet-500 text-violet-500 font-medium text-xs leading-tight uppercase rounded hover:shadow-lg hover:shadow-violet-300 focus:outline-none focus:ring-0;
+  }
+
+  .gt-fl-input {
+    @apply block w-full px-3 py-1.5 pl-9 pr-3 text-base font-normal text-slate-500 text-sm leading-none bg-white bg-clip-padding border border-solid border-violet-300 rounded transition ease-in-out m-0 focus:text-slate-700 focus:bg-white focus:border-violet-500 focus:outline-none;
+  }
+}

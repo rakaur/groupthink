@@ -7,12 +7,13 @@ services:
       - postgres:/var/lib/postgresql/data
     env_file: .env
 
-  streams:
+  rails:
     build: .
-    entrypoint: ./docker-entrypoint.sh rails server -b 0.0.0.0
+    entrypoint: ./docker-entrypoint.sh bash -c bin/dev
     env_file: .env
+    tty: true
     volumes:
-      - .:/streams
+      - .:/app
     ports:
       - "3000:3000"
     depends_on:

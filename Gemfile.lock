@@ -258,6 +258,10 @@ GEM
     stimulus-rails (1.0.4)
       railties (>= 6.0.0)
     strscan (3.0.3)
+    tailwindcss-rails (2.0.8-x86_64-darwin)
+      railties (>= 6.0.0)
+    tailwindcss-rails (2.0.8-x86_64-linux)
+      railties (>= 6.0.0)
     thor (1.2.1)
     tilt (2.0.10)
     timeout (0.3.0)
@@ -309,6 +313,7 @@ DEPENDENCIES
   simplecov
   solargraph
   stimulus-rails
+  tailwindcss-rails
   turbo-rails
   tzinfo-data
   webdrivers

@@ -18,7 +18,7 @@ require "rails/test_unit/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Streams
+module GroupThink
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
@@ -48,6 +48,6 @@ module Streams
     # <p> which breaks the styling.
     #
     # This stops it from wrapping it anything.
-    config.action_view.field_error_proc = Proc.new { |html_tag| html_tag }
+    # config.action_view.field_error_proc = Proc.new { |html_tag| html_tag }
   end
 end
