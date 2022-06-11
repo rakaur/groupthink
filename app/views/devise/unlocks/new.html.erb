@@ -1,37 +1,30 @@
-<div class="block">
-  <p class="is-size-4 has-text-centered">
-    resend account unlock instructions
-  </p>
+<div class="flex flex-col text-center">
+  <%= image_tag "logo-square.png", class: "w-48 mx-auto ph:mb-6 tabp:mb-12" %>
 </div>
 
-<%= render "shared/flash_message" %>
-<%= render "devise/shared/error_messages", resource: resource %>
-
-<%=
-  form_for resource,
-           as: resource_name,
-           url: unlock_path(resource_name),
-           html: { method: :post, data: turbo_false } do |f|
-%>
-  <div class="field">
-    <%= f.label :email, "email address", class: "label" %>
-    <p class="control has-icons-left">
-      <%=
-        f.email_field :email,
-                      autofocus: true,
-                      autocomplete: "email",
+<%= form_for resource,
+             as: resource_name,
+             url: unlock_path(resource_name),
+             html: { method: :post } do |f|
+  %>
+  <div class="form-floating mb-4">
+    <%= f.email_field :email, autocomplete: "email",
                       placeholder: "email address",
-                      class: "input"
-      %>
-      <span class="icon is-small is-left">
-        <i class="fas fa-envelope"></i>
-      </span>
-    </p>
+                      class: "gt-fl-input form-control" %>
+
+    <%= f.label :email, class: "text-violet-500 overflow-hidden" do %>
+      <i class="h-4 w-5 text-violet-300 fas fa-envelope"></i>
+      email address
+    <% end %>
   </div>
 
-  <div class="field">
-    <p class="control">
-      <%= f.submit "resend unlock instructions", class: "button is-primary is-fullwidth" %>
-    </p>
+  <div class="text-center pt-1 mb-6 dt:mb-12">
+    <button class="gt-btn" type="submit" form="new_user"
+      data-mdb-ripple="true"
+      data-mdb-ripple-color="light"
+      data-mdb-ripple-centered="true"
+      data-mdb-ripple-duration="1000ms"
+      >email unlock instructions
+    </button>
   </div>
 <% end %>
