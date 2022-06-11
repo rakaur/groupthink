@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_31_010419) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_11_142011) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "streams", force: :cascade do |t|
+  create_table "groups", force: :cascade do |t|
     t.string "all_tags", array: true
     t.string "any_tags", array: true
     t.bigint "author_ids", array: true
@@ -30,13 +30,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_31_010419) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "streams_users", id: false, force: :cascade do |t|
+  create_table "groups_users", id: false, force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "stream_id", null: false
+    t.bigint "group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["stream_id"], name: "index_streams_users_on_stream_id"
-    t.index ["user_id"], name: "index_streams_users_on_user_id"
+    t.index ["group_id"], name: "index_groups_users_on_group_id"
+    t.index ["user_id"], name: "index_groups_users_on_user_id"
   end
 
   create_table "thoughts", force: :cascade do |t|

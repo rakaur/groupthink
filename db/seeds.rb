@@ -6,12 +6,12 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-user = User.create email: "admin@admin.streams"
+user = User.create email: "admin@groupthink.me"
 user.password = "admin-password"
 user.save!
 
-stream = Stream.create created_ago: 1.month
-stream.save!
+group = Group.create created_ago: 1.month
+group.save!
 
 thought = Thought.create content: "Abandon all hope ye who enter here", user: user
 thought.save!

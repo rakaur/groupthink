@@ -1,24 +1,20 @@
-# Streams
+# groupthink
 
-[![Ruby on Rails CI](https://github.com/rakaur/streams/actions/workflows/rubyonrails.yml/badge.svg)](https://github.com/rakaur/streams/actions/workflows/rubyonrails.yml)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/2581ad79c4d6576a4bfa/test_coverage)](https://codeclimate.com/github/rakaur/streams/test_coverage)
-[![CodeQL](https://github.com/rakaur/streams/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/rakaur/streams/actions/workflows/codeql-analysis.yml)
-[![Brakeman Scan](https://github.com/rakaur/streams/actions/workflows/brakeman.yml/badge.svg)](https://github.com/rakaur/streams/actions/workflows/brakeman.yml)
-[![Maintainability](https://api.codeclimate.com/v1/badges/2581ad79c4d6576a4bfa/maintainability)](https://codeclimate.com/github/rakaur/streams/maintainability)
-[![codebeat badge](https://codebeat.co/badges/ea01eed3-d3b7-47fe-b473-e5b0bc49369e)](https://codebeat.co/projects/github-com-rakaur-streams-main)
+|  Builds  |    Security   | Quality |
+|:--------:|:-------------:|:-------:|
+[![Ruby on Rails CI](https://github.com/rakaur/groupthink/actions/workflows/rubyonrails.yml/badge.svg)](https://github.com/rakaur/groupthink/actions/workflows/rubyonrails.yml)|[![Brakeman Scan](https://github.com/rakaur/groupthink/actions/workflows/brakeman.yml/badge.svg)](https://github.com/rakaur/groupthink/actions/workflows/brakeman.yml)|[![Maintainability](https://api.codeclimate.com/v1/badges/2581ad79c4d6576a4bfa/maintainability)](https://codeclimate.com/github/rakaur/groupthink/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/2581ad79c4d6576a4bfa/test_coverage)](https://codeclimate.com/github/rakaur/groupthink/test_coverage)|[![CodeQL](https://github.com/rakaur/groupthink/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/rakaur/groupthink/actions/workflows/codeql-analysis.yml)|[![codebeat badge](https://codebeat.co/badges/f7c95fc1-54ab-4f68-b6bd-a50aebbc6827)](https://codebeat.co/projects/github-com-rakaur-groupthink-main)
 
-* Repository was created with:
+---
+
+Repository was created using `ruby-3.1.0` and `rails-7.0.3` via:
 
   ```
-  rails new streams --database=postgresql --asset-pipeline=propshaft
-                    --javascript=importmap --skip-action-mailer
-                    --skip-action-cable --skip-active-storage
-                    --skip-active-job
+  rails new groupthink --database=postgresql --asset-pipeline=propshaft
+                       --javascript=importmap --skip-action-mailer
+                       --skip-action-cable --skip-active-storage
+                       --skip-active-job
   ```
-
-* Ruby 3.1.0
-
-* Rails 7.0.3
 
 ---
 
@@ -55,7 +51,7 @@ In lieu of CLI flags, Rails uses `RAILS_ENV` to determine the current
 environment. For development you can usually leave this alone as it defaults to
 "development," but if you want production you need to set `RAILS_ENV`.
 
-Streams uses a postgresql database, specified via environment variables:
+Rails uses a postgresql database, specified via environment variables:
 
 * `DATABASE_HOST`
 * `DATABASE_PORT`
@@ -73,7 +69,7 @@ does.
 
 ## Tests
 
-Streams has a comprehensive test suite including controller, integration, model,
+There exists a comprehensive test suite including controller, integration, model,
 and system tests.
 
   `$ rails test`
