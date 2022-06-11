@@ -1,6 +1,6 @@
 <% flash.each do |flash_type, message| %>
-  <%=
-    template = flash_type == "alert" ? "alert" : "notification"
-    render template, body: message
-  %>
+  <input type="hidden" class="hidden"
+    data-controller="toast"
+    data-toast-icon-value="<%= flash_type == "alert" ? "error" : "info" %>"
+    data-toast-title-value="<%= message %>" />
 <% end %>

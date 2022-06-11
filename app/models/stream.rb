@@ -186,7 +186,7 @@ class Stream < ApplicationRecord
         # log_sub "query:"
         # qry.pretty_inspect.split("\n").each { |l| log_sub_sub l }
 
-        thoughts = thoughts.where(fmt.call(attr, value))
+        thoughts = thoughts.where(qry)
       end
     end
 
