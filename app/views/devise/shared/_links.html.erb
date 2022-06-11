@@ -19,7 +19,7 @@
     </a>
   <% end %>
 
-  <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+  <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
     <a class="gt-ol-btn" href="<%= new_password_path(resource_name) %>"
       data-mdb-ripple="true"
       data-mdb-ripple-color="light"

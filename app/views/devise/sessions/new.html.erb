@@ -23,16 +23,13 @@
                          class: "gt-fl-input form-control" %>
 
     <%= f.label :password, class: "text-violet-500 overflow-hidden" do %>
-      <i class="h-4 w-5 text-violet-300 fas fa-envelope"></i>
+      <i class="h-4 w-5 text-violet-300 fas fa-lock"></i>
       password
     <% end %>
   </div>
-
-  <div class="flex items-center justify-center gap-2 text-center text-violet-500 mb-4">
+  <div class="flex items-center justify-center gap-2 text-center text-violet-500 my-8">
     <%= f.check_box :remember_me, title: "remember me" %>
-    <%= f.label :remember_me, title: "remember me" do %>
-      <i class="fas fa-bookmark" title="remember me"></i>
-    <% end %>
+    <%= f.label :remember_me, "remember me", title: "remember me" %>
   </div>
 
   <div class="text-center pt-1 mb-6 dt:mb-12">
