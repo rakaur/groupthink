@@ -10,8 +10,12 @@ user = User.create email: "admin@groupthink.me"
 user.password = "admin-password"
 user.save!
 
-group = Group.create created_ago: 1.month
+filter = Filter.create filter_attribute: "created_at",
+                       comparison_type: "interval",
+                       compare_interval: 1.month
+
+group = Group.create
+group.filters << filter
 group.save!
 
-thought = Thought.create content: "Abandon all hope ye who enter here", user: user
-thought.save!
+Thought.create content: "Abandon all hope ye who enter here", user:

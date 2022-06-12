@@ -13,6 +13,7 @@ class User < ApplicationRecord
     Group.find(1)
   end
 
+  # TODO: change this table to use uuid primary keys
   def to_s
     Digest::SHA1.hexdigest(id.to_s)[0 .. 8]
   end

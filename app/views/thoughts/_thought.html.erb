@@ -1,55 +1,16 @@
-<div id="<%= dom_id thought %>" class="card block">
-  <div class="card-content">
-    <div class="media block">
-      <div class="media-content">
-        <div class="content">
-          <nav class="level is-mobile">
-            <div class="level-left">
-              <a class="level-item">
-                <small>
-                  <strong>
-                    <%= @user == thought.user ? "you" : thought.user.to_s %>
-                  </strong>
-                </small>
-              </a>
-            </div>
-            <div class="level-right">
-              <p class="level-item">
-                <small>
-                  <time datetime="<%= thought.created_at.strftime("%Y-%m-%d") %>">
-                    <small><%= thought.created_at.in_time_zone("America/Chicago").strftime("%e %b %Y") %></small>
-                  </time>
-                </small>
-              </p>
-            </div>
-          </nav>
-          <p>
-            <%= thought.content %> <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
-            <br /><br />
-          </p>
-        </div>
-        <nav class="level is-mobile">
-          <div class="level-left">
-            <p class="level-item">
-                <small>
-                  <%= time_ago_in_words thought.created_at %> ago
-                </small>
-              </time>
-            </p>
-          </div>
-          <div class="level-right">
-            <a class="level-item">
-              <span class="icon is-small"><i class="fas fa-circle-arrow-up"></i></span>
-            </a>
-            <a class="level-item">
-              <span class="icon is-small"><i class="fas fa-circle-arrow-down"></i></span>
-            </a>
-          </div>
-        </nav>
-      </div>
-    </div>
-  </div>
-  <footer class="card-footer">
-    <a href="#" class="card-footer-item">React</a>
-  </footer>
+<div id="<%= dom_id thought %>" class="border border-purple-500">
+  <p>
+    <%= current_user == thought.user ? "you" : thought.user.to_s %>
+  </p>
+  <p>
+    <time datetime="<%= thought.created_at.strftime("%Y-%m-%d") %>">
+      <small><%= thought.created_at.in_time_zone("America/Chicago").strftime("%e %b %Y") %></small>
+    </time>
+  </p>
+  <p>
+    <%= thought.content %> <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+  </p>
+  <p>
+    <%= time_ago_in_words thought.created_at %> ago
+  </p>
 </div>

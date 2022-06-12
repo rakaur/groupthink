@@ -1,74 +1,29 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# Accurate representation of the "default group"
+# Accurate representation of the "default Group"
 # Show all Thoughts created within the last month
-one:
+# Actual filter params are in filters.yml
+default:
   id: 1
-  created_ago: <%= 1.month %>
+  filters: default
 
 # Used by admin and 20 random others
 # Show all Thoughts ever created by admin
 two:
   id: 2
+  filters: two
   users: admin, <%= (0 ... 100).to_a.map { |i| "user_#{i}" }.sample(20).join(", ") %>
-  author_ids: [<%= ActiveRecord::FixtureSet.identify(:admin) %>]
 
-# Used by admin a 20 random others
+# Used by admin and 20 random others
 # Show all Thoughts created by a random user within the last year
 three:
   id: 3
+  filters: random_user, last_year
   users: admin, <%= (0 ... 100).to_a.map { |i| "user_#{i}" }.sample(20).join(", ") %>
-  author_ids: [<%= ActiveRecord::FixtureSet.identify((0 ... 100).to_a.map { |i| :"user_#{i}" }.sample) %>]
-  created_ago: <%= 1.year %>
 
-all_tags:
+none:
   users: admin
-  all_tags: []
-
-any_tags:
-  users: admin
-  any_tags: []
-
-author_id:
-  users: admin
-  author_ids: [<%= ActiveRecord::FixtureSet.identify((0 ... 100).to_a.map { |i| :"user_#{i}" }.sample) %>]
-
-author_ids:
-  users: admin
-  author_ids: [<%= ActiveRecord::FixtureSet.identify(:admin) %>, <%= ActiveRecord::FixtureSet.identify((0 ... 100).to_a.map { |i| :"user_#{i}" }.sample) %>]
-
-content:
-  users: admin
-
-created:
-  users: admin
-  created: <%= Time.parse("08:52 6 Sep 2016") %>
-
-created_ago:
-  users: admin
-  created_ago: <%= 1.year %>
-
-created_range:
-  users: admin
-  created_range: "[2016-09-06, <%= Date.current.to_s %>]"
-
-limit:
-  users: admin
-  limit: 5
-
-updated:
-  users: admin
-  updated: <%= Time.parse("08:52 6 Sep 2016") %>
-
-updated_ago:
-  users: admin
-  updated_ago: <%= 1.year %>
-
-updated_range:
-  users: admin
-  updated_range: "[2016-09-06, <%= Date.current.to_s %>]"
 
 multiple:
+  filters: created_range, random_user
   users: admin
-  author_ids: [<%= ActiveRecord::FixtureSet.identify(:admin) %>]
-  updated_range: "[<%= 9.months.ago.strftime("%Y-%m-%d") %>, <%= 1.week.ago.strftime("%Y-%m-%d") %>]"
