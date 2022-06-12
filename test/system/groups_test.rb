@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class GroupsTest < ApplicationSystemTestCase
   setup do
-    @group = groups(:one)
+    @group = groups(:default)
   end
 
   test "visiting the index" do

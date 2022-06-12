@@ -15,7 +15,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_11_160344) do
   enable_extension "plpgsql"
 
   create_table "filters", force: :cascade do |t|
-    t.string "attribute"
+    t.string "filter_attribute"
     t.string "comparison_type"
     t.string "comparison_operator"
     t.string "compare_string"
@@ -24,9 +24,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_11_160344) do
     t.datetime "compare_datetime"
     t.daterange "compare_daterange"
     t.interval "compare_interval"
-    t.string "compare_string_array"
-    t.bigint "compare_number"
-    t.bigint "compare_number_array"
+    t.string "compare_string_array", array: true
+    t.bigint "compare_integer"
+    t.bigint "compare_integer_array", array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,69 +1,48 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+# Show all Thoughts created within the last month
 default:
-  attribute: created_at
+  groups: one
+  filter_attribute: created_at
   comparison_type: interval
   compare_interval: <%= 1.month %>
-  groups: one
 
-all_tags:
-  attribute: tags
-  comparison_type: string_array
-  comparison_operator: "@>"
-  compare_string_array: "[tag1, tag2, tag3]"
-  groups: all_tags
+# Show all Thoughts ever created by admin
+two:
+  groups: two
+  filter_attribute: user
+  comparison_type: integer
+  compare_integer: <%= ActiveRecord::FixtureSet.identify(:admin) %>
 
-any_tags:
-  attribute: tags
-  comparison_type: string_array
-  comparison_operator: "<@"
-  compare_string_array: "[tag1, tag2, tag3]"
-  groups: any_tags
+# Show all Thoughts created by a random user
+random_user:
+  filter_attribute: user
+  comparison_type: integer
+  compare_integer: <%= ActiveRecord::FixtureSet.identify("user_#{rand(99)}") %>
 
-content:
-  attribute: content
-  comparison_type: string
-  compare_string: the Force
-  groups: content
+# Show all Thoughts created by a two random users
+random_users:
+  filter_attribute: user
+  comparison_type: integer_array
+  compare_integer_array: <%= [ActiveRecord::FixtureSet.identify("user_#{rand(99)}"), ActiveRecord::FixtureSet.identify("user_#{rand(99)}")] %>
 
-created:
-  attribute: created_at
-  comparison_type: date
-  compare_date: <%= Date.parse("2016-09-06") %>
-  groups: created
-
-created_ago:
-  attribute: created_at
+# Show all Thoughts created in the last year
+last_year:
+  filter_attribute: created_at
   comparison_type: interval
   compare_interval: <%= 1.year %>
-  groups: created_ago
+
+string_array:
+  filter_attribute: tags
+  comparison_type: string_array
+  compare_string_array: <%= %w[ tag1 tag2 tag 3 ] %>
+
+created:
+  filter_attribute: created_at
+  comparison_type: date
+  compare_date: <%= Date.parse("2016-09-06") %>
 
 created_range:
-  attribute: created_at
+  filter_attribute: created_at
   comparison_type: daterange
   compare_daterange: "[2016-09-06, <%= Date.current %>]"
-  groups: created_range
-
-user:
-  attribute: user
-  comparison_type: number
-  compare_number: 1
-
-users:
-  attribute: user
-  comparison_type: number_array
-  compare_number_array: "[1, 2]"
-
-one:
-  attribute: MyString
-  comparison_type: MyString
-  comparison_operator: MyString
-  compare_string: MyString
-  compare_date: 2022-06-11
-  compare_time: 2022-06-11 11:03:44
-  compare_datetime: 2022-06-11 11:03:44
-  compare_daterange:
-  compare_interval:
-  compare_string_array: MyString
-  compare_number:
-  compare_number_array:

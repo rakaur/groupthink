@@ -15,7 +15,7 @@ class GroupsController < ApplicationController
     # chain into the partials
     @thoughts = {}
     @groups.each do |group|
-      @thoughts[group.hash] = group.thoughts(10).includes(:user).load
+      @thoughts[group.hash] = group.thoughts.limit(10).includes(:user).load
     end
   end
 
@@ -40,16 +40,11 @@ class GroupsController < ApplicationController
   #
   # POST /groups or /groups.json
   def create
-    @group = Group.new(group_params)
+    @group = Group.create(group_params)
 
     respond_to do |format|
-      if @group.save
-        format.html { redirect_to group_url(@group), notice: "group was created" }
-        format.json { render :show, status: :created, location: @group }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @group.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to group_url(@group), notice: "group was created" }
+      format.json { render :show, status: :created, location: @group }
     end
   end
 
@@ -57,16 +52,15 @@ class GroupsController < ApplicationController
   #
   # PATCH/PUT /groups/1 or /groups/1.json
   def update
-    respond_to do |format|
-      if @group.update(group_params)
-        format.html { redirect_to edit_group_url(@group), notice: "group was updated" }
-        format.json { render :show, status: :ok, location: @group }
-      else
-        @group.reload # Not sure why this is necessary but it keeps around the invalid values
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @group.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+    #   if @group.update(group_params)
+    #     format.html { redirect_to edit_group_url(@group), notice: "group was updated" }
+    #     format.json { render :show, status: :ok, location: @group }
+    #   else
+    #     format.html { render :edit, status: :unprocessable_entity }
+    #     format.json { render json: @group.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # TODO :reek:TooManyStatements
@@ -90,13 +84,11 @@ class GroupsController < ApplicationController
     # Preload Thoughts to avoid additional queries
     # TODO remove limit and paginate
     def set_thoughts
-      @thoughts = @group.thoughts(10).includes(:user).load
+      @thoughts = @group.thoughts.limit(10).includes(:user).load
     end
 
     # Only allow a list of trusted parameters through.
     def group_params
-      params.require(:group).permit(%i[ all_tags any_tags author_ids content
-                                         created created_ago created_range limit
-                                         updated updated_ago updated_range ])
+      params.require(:group).permit(:filter_id)
     end
 end

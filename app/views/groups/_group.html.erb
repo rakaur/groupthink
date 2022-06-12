@@ -1,28 +1,16 @@
-<div id="<%= dom_id group %>" class="box">
-  <div class="block">
-    <nav class="level is-mobile">
-      <div class="level-left">
-      </div>
-      <div class="level-right">
-        <% unless current_page?(edit_group_path(group)) || group.id == 1 %>
-          <a class="level-item" href="<%= edit_group_path(group) %>">
-            <span class="icon is-small"><i class="fas fa-gear"></i></span>
-          </a>
-        <% end %>
-      </div>
-    </nav>
-
-    <p class="is-size-4 has-text-centered">
-      group #<%= group.id %>
-    </p>
-    <p class="has-text-centered">
-      <%= thoughts.size %> shown
-    </p>
-  </div>
-
-  <hr />
-
-  <% thoughts.each do |thought| %>
-    <%= render thought %>
+<div id="<%= dom_id group %>" class="border border-red-500">
+  <% unless current_page?(edit_group_path(group)) || group.id == 1 %>
+    <a href="<%= edit_group_path(group) %>">
+      <i class="fas fa-gear"></i>
+    </a>
   <% end %>
+
+  <p>
+    group #<%= group.id %>
+  </p>
+  <p>
+    <%= thoughts[group.hash].size %> shown
+  </p>
+
+  <%= render thoughts[group.hash] %>
 </div>

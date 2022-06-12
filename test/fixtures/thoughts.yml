@@ -25,3 +25,11 @@ updated:
   content: for Group.thoughts model unit test
   user: admin
   updated_at: <%= Time.parse("08:52 6 Sep 2016") %>
+
+one:
+  content: for Filter.query model unit test
+  user_id: 1
+
+two:
+  content: for Filter.query model unit test
+  user_id: 2

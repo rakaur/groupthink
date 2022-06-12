@@ -1,5 +1,1 @@
-<% @groups.each do |group| %>
-  <div>
-    <%#= render stream, stream: stream, thoughts: @thoughts[stream.hash] %>
-  </div>
-<% end %>
+<%= render @groups, thoughts: @thoughts %>

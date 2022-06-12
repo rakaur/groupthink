@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# Accurate representation of the "default group"
+# Accurate representation of the "default Group"
 # Show all Thoughts created within the last month
 # Actual filter params are in filters.yml
-one:
+default:
   id: 1
   filters: default
 
@@ -11,49 +11,19 @@ one:
 # Show all Thoughts ever created by admin
 two:
   id: 2
+  filters: two
   users: admin, <%= (0 ... 100).to_a.map { |i| "user_#{i}" }.sample(20).join(", ") %>
 
-# Used by admin a 20 random others
+# Used by admin and 20 random others
 # Show all Thoughts created by a random user within the last year
 three:
   id: 3
+  filters: random_user, last_year
   users: admin, <%= (0 ... 100).to_a.map { |i| "user_#{i}" }.sample(20).join(", ") %>
 
-all_tags:
-  users: admin
-  filters: all_tags
-
-any_tags:
-  users: admin
-  filters: any_tags
-
-author_id:
+none:
   users: admin
 
-author_ids:
-  users: admin
-
-content:
-  users: admin
-  filters: content
-
-created:
-  users: admin
-  filters: created
-
-created_ago:
-  users: admin
-  filters: created_ago
-
-created_range:
-  users: admin
-  filters: created_range
-
-updated:
-  users: admin
-
-updated_ago:
-  users: admin
-
-updated_range:
+multiple:
+  filters: created_range, random_user
   users: admin
