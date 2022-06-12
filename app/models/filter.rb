@@ -90,7 +90,7 @@ class Filter < ApplicationRecord
     qry = QUERY_MAP[col_type]&.fetch(comparison_type.to_sym, nil)&.(attr, cmp) || { attr => cmp }
 
     log_sub "query:"
-    qry.pretty_inspect.split("\n").each { |l| log_sub_sub l }
+    qry.pretty_inspect.split("\n").each { |l| log_sub_sub l } rescue nil
 
     log_title "Filter[#{id}]#query end"
 
