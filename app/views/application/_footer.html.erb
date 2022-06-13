@@ -1,15 +1,71 @@
+    <footer class="bg-white px-4 pt-4 sm:px-6 sm:pt-4 w-full">
+      <div class="md:flex md:justify-between md:items-center">
 
-      <footer class="
-        flex flex-col w-2/3 items-center justify-center p-5
-        bg-white rounded-lg shadow
-        ">
-        <p class="text-xs text-violet-800 text-center">
-          copyright &copy; 2022 on this, the <%= Date.current.day.ordinalize %> day of <%= Time.current.strftime("%B").downcase %> in the year of our lord <%= Date.current.year %><br />
-          this website is not affiliated with anything or anyone<br />
-          if you send me legal stuff i will post it on instagram<br /><br />
-          <a href="#">tai'shar malkier</a>
-        </p>
-      </footer>
-    </main>
+        <div class="mb-6 md:mb-0">
+          <a href="<%= root_path %>" class="flex items-center">
+            <img src="<%= image_path "logo.svg" %>" class="mr-3 h-20" alt="logo" />
+          </a>
+        </div>
+
+        <div class="
+          flex flex-col items-center justify-center
+          text-xs text-violet-900 text-center
+          ">
+          <p class="mb-4">copyright &copy; 2022 on this, the <%= Date.current.day.ordinalize %> day of <%= Time.current.strftime("%B").downcase %> in the year of our lord <%= Date.current.year %></p>
+          <p>this website is not affiliated with george orwell or whichever company owned him or whatever</p>
+          <p>if you send me a cease and desist i will post it on instagram</p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-8 sm:gap-6 sm:grid-cols-2 pt-5 sm:pt-auto text-center">
+          <div>
+            <h2 class="mb-6 text-sm font-semibold text-violet-800 uppercase">follow along</h2>
+            <ul class="text-violet-700">
+              <li class="mb-4">
+                <a href="https://github.com/rakaur/groupthink" class="hover:underline ">github</a>
+              </li>
+              <li>
+                <a href="#" class="hover:underline">discord</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h2 class="mb-6 text-sm font-semibold text-violet-800 uppercase">legal</h2>
+            <ul class="text-violet-700">
+              <li class="mb-4">
+                <a href="#" class="hover:underline">privacy policy</a>
+              </li>
+              <li>
+                <a href="#" class="hover:underline">terms of service</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- The footer of the footer -->
+      <hr class="mt-6 mb-2 border-gray-200" />
+      <div class="flex items-center justify-between text-gray-500">
+        <span class="text-xs text-center">
+          Copyright &copy; <%= Date.current.year %> Eric Will. All rights reserved.
+        </span>
+        <div class="flex justify-center mt-4 sm:mt-0 space-x-6">
+          <a href="https://rubyonrails.org" class="opacity-50 hover:opacity-100">
+            <img class="w-5 h-5" src="<%= image_path "rails.png" %>" />
+          </a>
+          <a href="https://www.ruby-lang.org" class="opacity-50 hover:opacity-100">
+            <img class="w-5 h-5" src="<%= image_path "ruby.png" %>" />
+          </a>
+          <a href="https://www.docker.com" class="hover:text-gray-900">
+            <i class="w-5 h-5 fab fa-docker fa-fw fa-lg"></i>
+          </a>
+          <a href="#" class="hover:text-gray-900">
+            <i class="w-5 h-5 fab fa-rebel fa-fw fa-lg"></i>
+          </a>
+          <a href="https://github.com/rakaur/groupthink" class="hover:text-gray-900">
+            <i class="w-5 h-5 fab fa-github fa-fw fa-lg"></i>
+          </a>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
