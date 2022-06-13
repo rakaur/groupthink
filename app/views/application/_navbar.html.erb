@@ -1,44 +1,83 @@
-<nav class="
-  flex flex-wrap items-center justify-between
-  relative w-full py-4
-  bg-gray-100 shadow-lg
-  text-violet-500 hover:text-violet-700 focus:text-violet-700
-  navbar navbar-expand-lg navbar-light
-  ">
-  <div class="container-fluid w-full flex flex-wrap items-center justify-between px-6">
-    <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+
+<nav class="w-full px-2 sm:px-4 py-2.5 rounded">
+  <div class="flex flex-wrap justify-between items-center mx-auto">
+
+    <a href="#" class="flex items-center justify-start md:w-1/3">
+      <%= image_tag "logo.svg", class: "mr-3 xs:h-6 h-11", alt: "logo" %>
+    </a>
+
+    <div class="flex items-center justify-end md:w-1/3 md:order-2">
+      <button type="button" class="flex mr-3 rounded-full md:mr-0" aria-expanded="false" type="button" data-dropdown-toggle="dropdown">
+        <span class="sr-only">open user menu</span>
+        <%#= image_tag "logo-bubbles.svg", class: "p-3 box-content w-6 h-6" %>
+        <i class="mr-2 text-violet-700 fas fa-user-circle fa-3x"></i>
+      </button>
+      <!-- Dropdown menu -->
+      <div class="hidden z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow" id="dropdown">
+        <div class="py-3 px-4">
+          <span class="block text-violet-800 font-semibold">
+            <i class="mr-2 fas fa-user fa-fw"></i>
+            Your account
+          </span>
+        </div>
+        <ul class="py-1" aria-labelledby="dropdown">
+          <li>
+            <a href="#" class="block py-2 px-4 text-base text-violet-700 hover:bg-violet-100">
+              <i class="mr-2 fas fa-user-gear fa-fw"></i>
+              Settings
+            </a>
+          </li>
+          <li>
+            <%= button_to destroy_user_session_path,
+              method: "delete",
+              class: "block w-full text-left py-2 px-4 text-violet-700 hover:bg-violet-100" do
+              %>
+              <i class="mr-2 fas fa-sign-out fa-fw"></i>
+              Sign out
+            <% end %>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Burger menu button -->
+      <button data-collapse-toggle="mobile-menu" type="button" aria-controls="mobile-menu" aria-expanded="false"
+        data-controller="navbar" data-action="navbar#toggleMenu"
+        class="
+        inline-flex items-center
+        p-2 text-sm text-violet-500 rounded-lg
+        md:hidden hover:bg-violet-100
+        focus:outline-none
+        ">
+        <span class="sr-only">open main menu</span>
+        <i class="fa-2x fas fa-bars fa-fw" data-navbar-target="show"></i>
+        <i class="fa-2x fas fa-xmark fa-fw !hidden" data-navbar-target="hide"></i>
+      </button>
+    </div>
+
+    <!-- Burger menu, also middle nav links -->
+    <div id="mobile-menu"
       class="
-      text-violet-500 bg-transparent
-      border-0 py-2 px-2.5
-      hover:shadow-none hover:no-underline
-      focus:outline-none focus:ring-0 focus:shadow-none focus:no-underline
-      navbar-toggler
+      hidden w-full md:block md:w-auto
       ">
-      <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars"
-        class="w-6" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-        <path fill="currentColor" d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path>
-      </svg>
-    </button>
-
-    <div class="collapse navbar-collapse flex-grow items-center" id="navbarSupportedContent">
-      <a class="flex items-center mt-2 mr-1 dt:mt-0" href="#">
-        <%= image_tag "logo.svg", class: "ph:h-6 tabp:h-9 tabl:mr-10 dt:h-12" %>
-      </a>
-
-      <!-- Left links -->
-      <ul class="navbar-nav flex flex-col pl-0 list-style-none mr-auto">
-        <li class="nav-item p-2">
-          <a class="nav-link text-violet-500 hover:text-violet-700 focus:text-violet-700 p-0" href="#">Dashboard</a>
+      <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-normal">
+        <li>
+          <a href="<%= root_path %>" aria-current="page"
+            class="
+            block py-2 pr-4 pl-3 rounded
+            text-violet-800 font-semibold bg-violet-100
+            md:bg-transparent md:p-0
+            "><i class="fas fa-home fa-fw mr-1"></i>Home</a>
+        </li>
+        <li>
+          <a href="#"
+            class="
+            block py-2 pr-4 pl-3 md:p-0 rounded
+            text-violet-700 font-normal bg-transparent
+            border-b border-violet-100 md:border-0
+            hover:bg-violet-100 md:hover:bg-transparent
+            "><i class="fas fa-circle-info fa-fw mr-1"></i>About</a>
         </li>
       </ul>
-      <!-- Left links -->
-    </div>
-    <!-- Collapsible wrapper -->
-
-    <!-- Right elements -->
-    <div class="flex items-center relative">
-    <!-- Right elements -->
     </div>
   </div>
 </nav>

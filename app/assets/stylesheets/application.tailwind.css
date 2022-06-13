@@ -16,6 +16,6 @@
   }
 
   .gt-floating-label {
-    @apply absolute text-base text-violet-500 tracking-wide duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white pl-8 pr-2 peer-focus:pl-9 peer-focus:pr-2 peer-focus:text-violet-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1
+    @apply absolute text-base text-violet-500 tracking-wide duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white pl-8 pr-2 peer-focus:pl-9 peer-focus:pr-2 peer-focus:text-violet-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-5 left-1
   }
 }
