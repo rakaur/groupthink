@@ -1,28 +1,24 @@
 <%= render "header" %>
 <%= render "navbar" %>
 
-<main class="flex flex-wrap w-full h-full p-10 gap-10">
-  <div class="grow flex flex-col">
-    <div class="grow flex flex-col items-end p-10 bg-white rounded-lg shadow-lg">
+<main class="grid grid-cols-4 w-full h-full p-10 gap-10">
+  <aside>
+    <div class="flex flex-col items-end p-10 bg-white rounded-lg shadow-lg">
       <p>hello</p>
       <p>hello</p>
       <p>hello</p>
     </div>
-  </div>
-  <div class="grow-[2] flex flex-col">
-    <div class="grow flex flex-col items-center p-10 bg-white rounded-lg shadow-lg">
-      <p>hello</p>
-      <p>hello</p>
-      <p>hello</p>
-    </div>
-  </div>
-  <div class="grow flex flex-col">
-    <div class="grow flex flex-col items-start p-10 bg-white rounded-lg shadow-lg">
-      <p>hello</p>
-      <p>hello</p>
+  </aside>
+  <section class="col-span-2">
+    <%= yield %>
+  </section>
+  <aside>
+    <div class="flex flex-col items-start p-10 bg-white rounded-lg shadow-lg">
+      <p>hello this will have menu items or something idk just trying to fill this out to make it a bit bigger woop</p>
+      <button type="button" class="gt-btn">sup</button>
       <p>hello</p>
     </div>
-  </div>
+  </aside>
 </main>
 
 <%= render "footer" %>

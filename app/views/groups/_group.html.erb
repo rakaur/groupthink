@@ -1,16 +1,24 @@
-<div id="<%= dom_id group %>" class="border border-red-500">
-  <% unless current_page?(edit_group_path(group)) || group.id == 1 %>
-    <a href="<%= edit_group_path(group) %>">
-      <i class="fas fa-gear"></i>
-    </a>
-  <% end %>
+<article id="<%= dom_id group %>"
+  class="
+  grow flex flex-col items-center px-10 pb-10 pt-4
+  bg-white rounded-lg shadow-lg gap-3
+  ">
 
-  <p>
-    group #<%= group.id %>
-  </p>
-  <p>
-    <%= thoughts[group.hash].size %> shown
-  </p>
+  <header class="w-full text-center mb-4">
+    <% unless current_page?(edit_group_path(group)) || group.id == 1 %>
+      <a href="<%= edit_group_path(group) %>">
+        <i class="fas fa-gear"></i>
+      </a>
+    <% end %>
 
-  <%= render thoughts[group.hash] %>
-</div>
+    <h2 class="mb-4 text-lg font-semibold text-violet-800 uppercase trackng-wide">
+      group <%= "##{group.id}" %>
+    </h2>
+    <p class="mb-4 text-base text-violet-700">
+      <span class="font-semibold"><%= thoughts.size %></span> shown
+    </p>
+  </header>
+
+  <%= render thoughts %>
+
+</article>

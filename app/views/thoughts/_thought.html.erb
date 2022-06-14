@@ -1,16 +1,90 @@
-<div id="<%= dom_id thought %>" class="border border-purple-500">
-  <p>
-    <%= current_user == thought.user ? "you" : thought.user.to_s %>
-  </p>
-  <p>
-    <time datetime="<%= thought.created_at.strftime("%Y-%m-%d") %>">
-      <small><%= thought.created_at.in_time_zone("America/Chicago").strftime("%e %b %Y") %></small>
-    </time>
-  </p>
-  <p>
-    <%= thought.content %> <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
-  </p>
-  <p>
-    <%= time_ago_in_words thought.created_at %> ago
-  </p>
+<div id="<%= dom_id thought %>"
+  class="
+  flex gap-4
+  bg-white
+  border border-violet-300
+  w-full rounded-lg
+  ">
+
+  <div class="flex border-r border-violet-300">
+    <div class="flex-none w-24 relative">
+      <img src="<%= image_path "bb8.jpg" %>" alt="" class="absolute inset-0 w-full h-full rounded-lg object-scale-down" loading="lazy" />
+    </div>
+  </div>
+
+  <div class="w-full py-4 pr-4">
+    <p>
+      <span class="text-sm font-semibold text-violet-800">
+        <%= thought.user %>
+        <% if current_user == thought.user %>
+          <small>(you)</small>
+        <% end %>
+      </span>
+      <time class="text-xs text-violet-700" datetime="<%= thought.created_at.strftime("%Y-%m-%d") %>">
+        <%= time_ago_in_words(thought.created_at) %> ago
+        <% if thought.created_at < 5.days.ago %>
+          on <%= thought.created_at.in_time_zone("America/Chicago").strftime("%e %b %Y") %>
+        <% end %>
+      </time>
+    </p>
+    <p class="mt-2 mb-4">
+      <%= thought.content %>
+    </p>
+
+    <div class="flex items-center justify-between w-full">
+      <div class="flex items-center text-violet-500 space-x-1">
+        <a href="#" class="hover:text-violet-900"><i class="fas fa-circle-arrow-up"></i></a>
+        <a href="#" class="hover:text-violet-900"><i class="fas fa-circle-arrow-down"></i></a>
+        <span class="w-1 h-1 mx-1.5 bg-violet-900 rounded-full"></span>
+        <p class="text-xs font-semibold text-violet-900">4.95</p>
+      </div>
+
+      <div class="flex items-center space-x-1">
+        <button data-dropdown-toggle="react-<%= dom_id thought %>" data-dropdown-placement="left"
+          class="
+          relative inline-flex items-center justify-center
+          p-0.5 overflow-hidden
+          text-sm font-medium text-gray-900
+          rounded-full group
+          bg-gradient-to-r from-one via-two to-three
+          group-hover:from-three group-hover:via-two group-hover:to-one
+          hover:text-white
+          focus:ring-4 focus:outline-none focus:ring-violet-300
+          ">
+          <span class="
+            relative px-2 py-1.5
+            transition-all ease-in duration-75
+            bg-white rounded-full group-hover:bg-opacity-0
+            "><i class="w-4 fab fa-rebel fa-fw"></i>
+          </span>
+        </button>
+        <div id="react-<%= dom_id thought %>" class="hidden z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow">
+          <div class="py-3 px-4">
+            <span class="block text-violet-800 font-semibold">
+              <i class="mr-2 fas fa-user fa-fw"></i>
+              Your account
+            </span>
+          </div>
+          <ul class="py-1" aria-labelledby="dropdown">
+            <li>
+              <a href="#" class="block py-2 px-4 text-base text-violet-700 hover:bg-violet-100">
+                <i class="mr-2 fas fa-user-gear fa-fw"></i>
+                Settings
+              </a>
+            </li>
+            <li>
+              <%= button_to destroy_user_session_path,
+                method: "delete",
+                class: "block w-full text-left py-2 px-4 text-violet-700 hover:bg-violet-100" do
+                %>
+                <i class="mr-2 fas fa-sign-out fa-fw"></i>
+                Sign out
+              <% end %>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </div>
