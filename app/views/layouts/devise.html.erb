@@ -1,29 +1,28 @@
-<%= render "header" %>
-
-<main class="
-  flex flex-col
-  items-center justify-center
-  w-full h-full
-  bg-gradient-to-r from-one via-two to-three
-  ">
-
-  <section class="
-    flex flex-col box-content
-    items-center justify-center
-    bg-white shadow-2xl rounded-lg
-    space-y-4 ph:px-6 tabp:px-20 ph:py-3 tabp:py-10
-    ">
-
-    <article class="
+  <%= render "header" %>
+    <main class="
       flex flex-col
-      items-stretch justify-center
+      items-center justify-center
+      w-full h-full
       ">
 
-      <%= yield %>
-      <%= render "devise/shared/links" %>
+      <section class="
+        flex flex-col box-content
+        items-center justify-center
+        bg-white shadow-2xl rounded-lg
+        space-y-4 xs:px-6 sm:px-20 xs:py-3 sm:py-10
+        ">
 
-    </article>
-  </section>
-</main>
+        <article class="
+          flex flex-col
+          items-stretch justify-center
+          ">
 
-<%= render "footer" %>
+          <%= yield %>
+          <%= render "devise/shared/links" %>
+
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
+

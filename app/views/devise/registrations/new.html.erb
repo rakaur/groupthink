@@ -1,5 +1,5 @@
 <div class="flex flex-col text-center">
-  <%= image_tag "logo-square.png", class: "w-48 mx-auto ph:mb-6 tabp:mb-12" %>
+  <%= image_tag "logo-square.png", class: "w-48 mx-auto xs:mb-6 sm:mb-12" %>
 </div>
 
 <%= form_for resource,
@@ -7,38 +7,44 @@
              url: registration_path(resource_name) do |f|
   %>
 
-  <div class="form-floating mb-4">
+  <div class="relative mb-4">
     <%= f.email_field :email, autocomplete: "email",
-                      placeholder: "email address",
-                      class: "gt-fl-input form-control" %>
+                      placeholder: " ",
+                      class: "gt-floating-input peer" %>
 
-    <%= f.label :email, class: "text-violet-500 overflow-hidden" do %>
-      <i class="h-4 w-5 text-violet-300 fas fa-envelope"></i>
+    <%= f.label :email, class: "gt-floating-label overflow-hidden" do %>
+      <div class="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
+        <i class="text-violet-300 fas fa-envelope"></i>
+      </div>
       email address
     <% end %>
   </div>
-  <div class="form-floating mb-4">
+  <div class="relative mb-4">
     <%= f.password_field :password, autocomplete: "new-password",
-                         placeholder: "password",
-                         class: "gt-fl-input form-control" %>
+                      placeholder: " ",
+                      class: "gt-floating-input peer" %>
 
-    <%= f.label :password, class: "text-violet-500 overflow-hidden" do %>
-      <i class="h-4 w-5 text-violet-300 fas fa-lock"></i>
+    <%= f.label :password, class: "gt-floating-label overflow-hidden" do %>
+      <div class="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
+        <i class="text-violet-300 fas fa-lock"></i>
+      </div>
       password
     <% end %>
   </div>
-  <div class="form-floating mb-4">
+  <div class="relative mb-4">
     <%= f.password_field :password_confirmation, autocomplete: "new-password",
-                         placeholder: "confirm password",
-                         class: "gt-fl-input form-control" %>
+                      placeholder: " ",
+                      class: "gt-floating-input peer" %>
 
-    <%= f.label :password, class: "text-violet-500 overflow-hidden" do %>
-      <i class="h-4 w-5 text-violet-300 fas fa-check"></i>
+    <%= f.label :password_confirmation, class: "gt-floating-label overflow-hidden" do %>
+      <div class="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
+        <i class="text-violet-300 fas fa-check"></i>
+      </div>
       confirm password
     <% end %>
   </div>
 
-  <div class="text-center pt-1 mb-6 dt:mb-12">
+  <div class="text-center pt-1 mb-6 lg:mb-12">
     <button class="gt-btn" type="submit" form="new_user"
       data-mdb-ripple="true"
       data-mdb-ripple-color="light"

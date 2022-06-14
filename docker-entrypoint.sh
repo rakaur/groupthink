@@ -24,6 +24,8 @@ fi
 # Remove pre-existing puma/passenger server.pid
 rm -f tmp/pids/server.pid
 
+trap "exit" SIGHUP SIGINT SIGTERM
+
 # run passed commands
 echo "Executing: ${@}"
 ${@}

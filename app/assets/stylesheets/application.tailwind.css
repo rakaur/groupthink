@@ -11,7 +11,11 @@
     @apply inline-block px-6 py-2.5 border-2 border-violet-500 text-violet-500 font-medium text-xs leading-tight uppercase rounded hover:shadow-lg hover:shadow-violet-300 focus:outline-none focus:ring-0;
   }
 
-  .gt-fl-input {
-    @apply block w-full px-3 py-1.5 pl-9 pr-3 text-base font-normal text-slate-500 text-sm leading-none bg-white bg-clip-padding border border-solid border-violet-300 rounded transition ease-in-out m-0 focus:text-slate-700 focus:bg-white focus:border-violet-500 focus:outline-none;
+  .gt-floating-input {
+    @apply block px-2.5 pb-2.5 pt-4 w-full text-sm text-slate-500 !leading-8 bg-transparent !rounded !border !border-violet-300 focus:outline-none focus:ring-0 focus:!border-violet-500
+  }
+
+  .gt-floating-label {
+    @apply absolute text-base text-violet-500 tracking-wide duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white pl-8 pr-2 peer-focus:pl-9 peer-focus:pr-2 peer-focus:text-violet-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-5 left-1
   }
 }

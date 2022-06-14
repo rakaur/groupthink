@@ -1,22 +1,10 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: %i[ show edit update destroy ]
-  before_action :set_thoughts, only: %i[ edit update ]
+  before_action :set_default_group, only: :index
+  before_action :set_thoughts, only: %i[ index edit ]
 
   # GET /groups or /groups.json
   def index
-    # Load the default Group followed by Groups the current user owns
-    @groups = Group.where(id: 1)
-    @groups = @groups.or(Group.where(id: current_user.groups.limit(2))) if user_signed_in?
-    @groups = @groups.limit(3).order(id: :asc)
-
-    # Since the `Group#thoughts` method only looks like a real association
-    # but really isn't and has no caching, we pre-load all of the Users from
-    # all of the Thoughts from all of the Groups and pass it down the render
-    # chain into the partials
-    @thoughts = {}
-    @groups.each do |group|
-      @thoughts[group.hash] = group.thoughts.limit(10).includes(:user).load
-    end
   end
 
   # GET /groups/1 or /groups/1.json
@@ -79,6 +67,10 @@ class GroupsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_group
       @group = Group.find(params[:id])
+    end
+
+    def set_default_group
+      @group = user_signed_in? ? current_user.default_group : Group.find(1)
     end
 
     # Preload Thoughts to avoid additional queries

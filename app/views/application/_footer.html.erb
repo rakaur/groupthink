@@ -1,31 +1,68 @@
-<!--    <footer class="mt-28">
-      <div>
-        <small>
-          copyright &copy; on this, the <%= Date.current.day.ordinalize %> day of <%= Time.current.strftime("%B").downcase %> in the year of our lord <%= Date.current.year %><br />
-          this website is not affiliated with anything or anyone<br />
-          if you send me legal stuff i will post it on instagram<br /><br />
-          <a href="#">tai'shar malkier</a>
-        </small>
+    <footer class="bg-white px-4 sm:px-6 w-full">
+      <div class="md:flex md:justify-between md:items-center">
+
+        <div class="flex-1 mb-6 md:mb-0">
+          <a href="<%= root_path %>" class="flex items-center justify-center">
+            <img src="<%= image_path "logo-square.png" %>" class="mr-3 w-32 h-32" alt="logo" />
+          </a>
+        </div>
+
+        <div class="flex-1 flex flex-col items-center justify-center text-xs text-violet-900 text-center">
+          <p class="mb-4">copyright &copy; 2022 on this, the <%= Date.current.day.ordinalize %> day of <%= Time.current.strftime("%B").downcase %> in the year of our lord <%= Date.current.year %></p>
+          <p>this website is not affiliated with george orwell or whichever company owned him or whatever</p>
+          <p>if you send me a cease and desist i will post it on instagram</p>
+        </div>
+
+        <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-5 sm:pt-auto">
+          <div class="flex flex-col text-right pr-5 border-r border-violet-200">
+            <h2 class="mb-4 text-sm font-semibold text-violet-800 uppercase trackng-wide">development</h2>
+            <ul class="text-xs text-violet-700">
+              <li class="mb-4">
+                <a href="https://github.com/rakaur/groupthink" class="hover:underline ">github</a>
+              </li>
+              <li>
+                <a href="#" class="hover:underline">discord</a>
+              </li>
+            </ul>
+          </div>
+          <div class="flex flex-col text-left">
+            <h2 class="mb-4 text-sm font-semibold text-violet-800 uppercase tracking-wide">lawyer stuff</h2>
+            <ul class="text-xs text-violet-700">
+              <li class="mb-4">
+                <a href="#" class="hover:underline">privacy policy</a>
+              </li>
+              <li>
+                <a href="#" class="hover:underline">terms of service</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </footer>-->
 
-    <!--<footer class="bg-gray-100 text-center">
-      <div class="container p-6 text-gray-800">
-            <h5 class="font-medium mb-2 uppercase">Footer text</h5>
-
-            <p class="mb-4">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
-              molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae
-              aliquam voluptatem veniam, est atque cumque eum delectus sint!
-            </p>
+      <!-- The footer of the footer -->
+      <hr class="my-2 border-violet-200" />
+      <div class="flex items-center justify-between text-gray-500">
+        <span class="text-xs text-center">
+          Copyright &copy; <%= Date.current.year %> Eric Will. All rights reserved.
+        </span>
+        <div class="flex justify-center mt-4 sm:mt-0 space-x-6">
+          <a href="https://rubyonrails.org" class="opacity-50 hover:opacity-100">
+            <img class="w-5 h-5" src="<%= image_path "rails.png" %>" />
+          </a>
+          <a href="https://www.ruby-lang.org" class="opacity-50 hover:opacity-100">
+            <img class="w-5 h-5" src="<%= image_path "ruby.png" %>" />
+          </a>
+          <a href="https://www.docker.com" class="hover:text-gray-900">
+            <i class="w-5 h-5 fab fa-docker fa-fw fa-lg"></i>
+          </a>
+          <a href="#" class="hover:text-gray-900">
+            <i class="w-5 h-5 fab fa-rebel fa-fw fa-lg"></i>
+          </a>
+          <a href="https://github.com/rakaur/groupthink" class="hover:text-gray-900">
+            <i class="w-5 h-5 fab fa-github fa-fw fa-lg"></i>
+          </a>
+        </div>
       </div>
-
-      <div class="text-center text-gray-700 p-4" style="background-color: rgba(0, 0, 0, 0.2);">
-        © 2021 Copyright:
-        <a class="text-gray-800" href="https://tailwind-elements.com/">Tailwind Elements</a>
-      </div>
-    </footer>-->
-
-    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+    </footer>
   </body>
 </html>
