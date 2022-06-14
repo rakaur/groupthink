@@ -1,10 +1,10 @@
 version: "3.9"
 
 services:
-  postgres:
+  psql:
     image: postgres:14.3-alpine
     volumes:
-      - postgres:/var/lib/postgresql/data
+      - psql:/var/lib/postgresql/data
     env_file: .env
 
   rails:
@@ -12,12 +12,13 @@ services:
     entrypoint: ./docker-entrypoint.sh bash -c bin/dev
     env_file: .env
     tty: true
+    stdin_open: true
     volumes:
       - .:/app
     ports:
       - "3000:3000"
     depends_on:
-      - postgres
+      - psql
 
 volumes:
-  postgres:
+  psql:

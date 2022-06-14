@@ -10,7 +10,7 @@ RUN bundle install --jobs=4
 FROM ruby:3.1.0-alpine
 RUN apk update && \
     apk upgrade && \
-    apk add bash tzdata postgresql-client yarn && \
+    apk add bash tzdata postgresql-client && \
     rm -rf /var/cache/apk/*
 WORKDIR /app
 COPY --from=build /usr/local/bundle /usr/local/bundle
