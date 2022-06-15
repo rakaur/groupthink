@@ -18,4 +18,14 @@ group = Group.create
 group.filters << filter
 group.save!
 
+Thought.create content: "His 5 de Mayo party starts on the 8th of March", user:
+Thought.create content: "He played a game of Russian Roulette with a fully loaded magnum, and won", user:
+Thought.create content: "Once while sailing around the world, he discovered a short cut", user:
+Thought.create content: "He has inside jokes with people he’s never met.", user:
+Thought.create content: "Bigfoot tries to get pictures of him", user:
+Thought.create content: "The Holy Grail is looking for him", user:
+Thought.create content: "Bigfoot tries to get pictures of him", user:
+Thought.create content: "Once he ran a marathon because it was “on the way”", user:
+Thought.create content: "His organ donation card also lists his beard", user:
+Thought.create content: "He lives vicariously through himself", user:
 Thought.create content: "Abandon all hope ye who enter here", user:
